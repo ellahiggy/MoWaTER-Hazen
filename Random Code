@@ -1,0 +1,27 @@
+plot(raw_data$Date_Time,                              # Draw first time series
+     raw_data$P_p_TR1,
+     type = "l",
+     col = 2,
+     ylim = c(0, 20),
+     xlab = "Date",
+     ylab = "Permeate Pressure")
+lines(raw_data$Date_Time,                              # Draw first time series
+      raw_data$P_p_TR2,
+      type = "l",
+      col = 3)
+lines(raw_data$Date_Time,                              # Draw first time series
+      raw_data$P_p_TR3,
+      type = "l",
+      col = 4)
+lines(raw_data$Date_Time,                              # Draw first time series
+      raw_data$P_p_TR4,
+      type = "l",
+      col = 3)
+lines(raw_data$Date_Time,                              # Draw first time series
+      raw_data$P_p_TR5,
+      type = "l",
+      col = 4)
+legend("topright",                           # Add legend to plot
+       c("ts1", "ts2", "ts3","ts4","ts5"),
+       lty = 1,
+       col = 2:6)
