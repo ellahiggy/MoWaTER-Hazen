@@ -23,25 +23,25 @@ HSCompleteEntriesCopy <- HSCompleteEntriesCopy[ , !(names(HSCompleteEntriesCopy)
 correlations <- cor(HSCompleteEntriesCopy[,unlist(lapply(HSCompleteEntriesCopy, is.numeric))])
 correlations <- as.data.frame(correlations)
 
-corrVarNames <- names(correlations)
-
-highCorrelationsList <- vector()
-size <- length(correlations) # square!!!
-r <- 1
-c <- 1
-for(r in 1:size)
-  for(c in 1:size)
-    if(!(is.na(correlations[r,c])))
-      if(correlations[r,c] > 0.9 && correlations[r,c] < 1)
-        highCorrelationsList <- c(highCorrelationsList, c(corrVarNames[r], corrVarNames[c], correlations[r,c]))
-
-x <- 1
-while(x < length(highCorrelationsList))
-{
-  paste(highCorrelationsList[x], highCorrelationsList[x+1], highCorrelationsList[x+2])
-  print(paste(highCorrelationsList[x], highCorrelationsList[x+1], highCorrelationsList[x+2]))
-  x <- x + 3
-}
+# corrVarNames <- names(correlations)
+# 
+# highCorrelationsList <- vector()
+# size <- length(correlations) # square!!!
+# r <- 1
+# c <- 1
+# for(r in 1:size)
+#   for(c in 1:size)
+#     if(!(is.na(correlations[r,c])))
+#       if(correlations[r,c] > 0.9 && correlations[r,c] < 1)
+#         highCorrelationsList <- c(highCorrelationsList, c(corrVarNames[r], corrVarNames[c], correlations[r,c]))
+# 
+# x <- 1
+# while(x < length(highCorrelationsList))
+# {
+#   paste(highCorrelationsList[x], highCorrelationsList[x+1], highCorrelationsList[x+2])
+#   print(paste(highCorrelationsList[x], highCorrelationsList[x+1], highCorrelationsList[x+2]))
+#   x <- x + 3
+# }
 
 
 
