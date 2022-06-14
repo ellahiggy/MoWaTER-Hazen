@@ -76,14 +76,8 @@ Train_5 <-
 
 ### Plots of Specific Flux, Normalized Differential Pressure, Permeate Conductivity for Stakeholders
 
-# This code creates 15 plots: One plot per train (five trains = five plots) for specific flux over time, 
-# normalized differential pressure over time, and permeate conductivity over time. 
-
-
-
-# swd 
-load("~/Desktop/DATA SCIENCE FELLOWS/Hazen and Sawyer/dataset/HSMaster - Hazen and Sawyer (1).rda")
-
+## This code creates 15 plots: One plot per train (five trains = five plots) for specific flux over time, 
+## normalized differential pressure over time, and permeate conductivity over time. 
 
 
 
