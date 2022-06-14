@@ -26,9 +26,6 @@
 # Please change the directory to one that includes the following files:
 # "Sample_Membrane_Treatment_Plant_Data" spreadsheet
 # HSMaster - Hazen and Sawyer.rda"
-setwd("/Users/cyrilpillai/Desktop/Data_Processing")
-load("HSMaster - Hazen and Sawyer.rda")
-
 
 #Data general to all trains
 General <- HSMaster[, c("Date_Time", "T_f_CO", "TCF_a")]
