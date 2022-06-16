@@ -70,6 +70,15 @@ for (num in Data_ON_Number){
   Data_ON_Change$ON_Count[num] <- num
   Data_ON_Change$Start_Index[num] <- min(which(data_ONOFF$ON_Count == num))
   Data_ON_Change$End_Index[num] <- max(which(data_ONOFF$ON_Count == num))
+  Data_ON_Change$Time_ON[num] <- max(which(data_ONOFF$ON_Count == num)) - min(which(data_ONOFF$ON_Count == num))
+  }
+
+
+# Add Train Number below and remove comment
+
+Data_ON_Change$Time_of_CIP[1] <- 0
+for (num in 2:nrow(Data_ON_Change)){
+  Data_ON_Change$Time_of_CIP[num] <- Data_ON_Change$Start_Index[num] - Data_ON_Change$End_Index[num-1]
 }
 
 # Add Train Number below and remove comment
