@@ -98,25 +98,47 @@ Train3_ON_Change = Data_ON_Change
  
 Train3_ON_Change <- Train3_ON_Change[-c(5),]
 
+list_of_change_var <- c()
+list_of_hours
+
+vecTimes <- paste(month(HSMaster$Date_Time[X$starting_locations]), "-" ,month(HSMaster$Date_Time[X$ending_locations]))
+
+
+
 Change_Data <- Train3_ON_Change
 Train_Data <- Train_3
 
 for (num in 1:nrow(Change_Data)){
-  x <- Change_Data$Time_ON[num] / 1
   data <- Train_Data[Train_Data$Index[Change_Data$Start_Index[num]:Change_Data$End_Index[num]],]
   list <- data$Sp_Fl
   data_indices <- c(Change_Data$Start_Index[num]:Change_Data$End_Index[num])
   data_indices <- data_indices - data_indices[1] + 1
-  #data_indices <- data_indices / x
+  #data_indices <- data_indices / Change_Data$Time_ON[num]
   
   if (num == 1){
-    plot(data_indices, list, main = "Train 3 Specific Flux over Time",type = "l",col = num, ylim = c(.075,.09), xlab = "Standardized Time", ylab = "Specific Flux")
+    if (Change_Data$Time_ON[num] > 100) {
+       plot(data_indices, list, main = "Train 3 Specific Flux over Time",type = "l",col = num, ylim = c(.075,.09), xlab = "Standardized Time", ylab = "Specific Flux")
+    model <- lm(list ~ data_indices)
+    abline(model, col = num)
+    list_of_change_var <- append(list_of_change_var,model$coefficients[2]*Change_Data$Time_ON[num])
+    }
+   
   }
   else{
-    points(data_indices, list, type = "l", col = num)
+    if (Change_Data$Time_ON[num] > 100) {
+       points(data_indices, list, type = "l", col = num)
+    model <- lm(list ~ data_indices)
+    abline(model, col = num)
+    list_of_change_var <- append(list_of_change_var,model$coefficients[2]*Change_Data$Time_ON[num])
+    }
+   
   }
 }
+
+barplot(-list_of_change_var)
  
+
+
 # ------------------------------------------------------------------------------
 
 # Train 3 Normalized Salt Passage
@@ -127,12 +149,11 @@ Change_Data <- Train3_ON_Change
 Train_Data <- Train_3
 
 for (num in 1:nrow(Change_Data)){
-  x <- Change_Data$Time_ON[num] / 1
   data <- Train_Data[Train_Data$Index[Change_Data$Start_Index[num]:Change_Data$End_Index[num]],]
   list <- data$SP_n
   data_indices <- c(Change_Data$Start_Index[num]:Change_Data$End_Index[num])
   data_indices <- data_indices - data_indices[1] + 1
-  data_indices <- data_indices / x
+  #data_indices <- data_indices / Change_Data$Time_ON[num]
   
   if (num == 1){
     plot(data_indices, list, main = "Train 3 Normalized Salt Passage over Time",type = "l",col = num, ylim = c(1,1.3), xlab = "Standardized Time", ylab = "Normalized Salt Passage")
@@ -141,6 +162,8 @@ for (num in 1:nrow(Change_Data)){
     points(data_indices, list, type = "l", col = num)
   }
 }
+
+
 
 
 # ------------------------------------------------------------------------------
