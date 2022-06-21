@@ -69,3 +69,24 @@ Train_5 <-
 # No null values in the dataset, all done!
 
 
+# Variables for EDA Plots
+
+# Variables for five train plots of specific flux plots with values for train = OFF
+na_values_1_spfl <- as.integer(is.na(Train_1$Sp_Fl_TR1))*mean(Train_1$Sp_Fl_TR1,na.rm=TRUE) 
+na_time_1_spfl <- Train_1$Date_Time[is.na(Train_1$Sp_Fl_TR1)]
+
+na_values_2_spfl <- as.integer(is.na(Train_2$Sp_Fl_TR2))*mean(Train_2$Sp_Fl_TR2,na.rm=TRUE) 
+na_time_2_spfl <- Train_2$Date_Time[is.na(Train_2$Sp_Fl_TR2)]
+
+na_values_3_spfl <- as.integer(is.na(Train_3$Sp_Fl_TR3))*mean(Train_3$Sp_Fl_TR3,na.rm=TRUE) 
+na_time_3_spfl <- Train_3$Date_Time[is.na(Train_3$Sp_Fl_TR3)]
+
+na_values_4_spfl <- as.integer(is.na(Train_4$Sp_Fl_TR4))*mean(Train_4$Sp_Fl_TR4,na.rm=TRUE) 
+na_time_4_spfl <- Train_4$Date_Time[is.na(Train_4$Sp_Fl_TR4)]
+
+na_values_5_spfl <- as.integer(is.na(Train_5$Sp_Fl_TR5))*mean(Train_5$Sp_Fl_TR5,na.rm=TRUE) 
+na_time_5_spfl <- Train_5$Date_Time[is.na(Train_5$Sp_Fl_TR5)]
+
+
+
+
