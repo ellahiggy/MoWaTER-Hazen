@@ -33,6 +33,7 @@ load("HSMaster - Hazen and Sawyer.rda")
 General <- HSMaster[, c("Date_Time", "T_f_CO", "TCF_a")]
 
 vars <- c("Date_Time","Sp_Fl","Nt_DP","NCp","Per_R_a","P_f","SP_n","ON_OFF","Index")
+#column name standardization
 
 
 #Data for each variable by Train, as detailed above
@@ -72,7 +73,5 @@ colnames(Train_5) <- vars
 #clean df with all variables we created 
 #list of dataframes
 #save as .rda object
-
-
 
 
