@@ -17,7 +17,7 @@ for (column_num in c(2:6)) {
 # potential clean in place/membrane change. Use the data which has been standardized
 
 df <- na.omit(Train_1_standardized[Train_1_standardized$Date_Time >= "2020-12-01 00:00:00" & 
-                                 Train_1_standardized$Date_Time <= "2021-03-30 02:00:00",])
+                                 Train_1_standardized$Date_Time <= "2021-03-30 02:00:00",]) 
 
 par(mfrow = c(1,1))
 
