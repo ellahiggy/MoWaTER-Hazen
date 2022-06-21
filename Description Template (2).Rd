@@ -1,9 +1,9 @@
-\name{project_name} % replace with your project name
-\alias{project_name} % replace with your project name
+\name{Hazen_and_Sawyer} % replace with your project name
+\alias{Hazen_and_Sawyer} % replace with your project name
 
 \docType{data} % don't change
 
-\title{Full Capitalized Spaced Name Here} % replace with your project full name
+\title{Hazen and Sawyer} % replace with your project full name
 
 \description{
 % this paragraph should contain full sentences that would answer these questions for someone who has never seen this data before
@@ -12,7 +12,7 @@ Where did this data come from? What does it tell you? What type(s) of model was 
 
 
 \usage{
-data(project_name) #- loads into working environment
+data(Hazen_and_Sawyer) #- loads into working environment
 project_name
 }
 
@@ -47,7 +47,10 @@ ex: data frame with 3,285 rows and 6 columns, the variables of which are as foll
 
 \source{
 % fill this in
-Name of stakeholder/company + contact info
+Hazen and Sawyer: 
++ Javad Roostaei - 
++ Ben Stanford - 
+
 
 Links to relevant information
 }
