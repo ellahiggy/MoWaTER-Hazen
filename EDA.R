@@ -601,8 +601,8 @@ legend("topleft",                                 # Add legend to plot
 
 data_ONOFF$ON_Count <- 0
 
-#data_ONOFF[is.na(data_ONOFF)] = 0
-#data_ONOFF[is.null(data_ONOFF)] = 0
+data_ONOFF[is.na(data_ONOFF)] = 0
+data_ONOFF[is.null(data_ONOFF)] = 0
 
 off <- 0
 on <- 0
@@ -647,8 +647,6 @@ for (num in 2:nrow(Data_ON_Change)){
 
 # Add Train Number below and remove comment
 # Train#_ON_Change = Data_ON_Change  
-
-#---------------------------------------------------------------------------
 
 
 # ------------------------------------------------------------------------------------------------------
