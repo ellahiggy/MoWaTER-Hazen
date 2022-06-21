@@ -36,12 +36,12 @@ colnames(Train_5) <- vars
 
 # Add Train Number below and remove comment
 
-data_ONOFF <- Train_4
+# data_ONOFF <- Train_#
 
 data_ONOFF$ON_Count <- 0
 
-data_ONOFF[is.na(data_ONOFF)] = 0
-data_ONOFF[is.null(data_ONOFF)] = 0
+#data_ONOFF[is.na(data_ONOFF)] = 0
+#data_ONOFF[is.null(data_ONOFF)] = 0
 
 off <- 0
 on <- 0
@@ -88,7 +88,7 @@ for (num in 2:nrow(Data_ON_Change)){
 
 # Add Train Number below and remove comment
 
-Train4_ON_Change = Data_ON_Change  
+# Train#_ON_Change = Data_ON_Change  
 
 # ------------------------------------------------------------------------------
 
