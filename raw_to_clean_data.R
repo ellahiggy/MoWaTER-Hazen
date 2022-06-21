@@ -23,7 +23,7 @@
 #  -------------------------------------------------------------------------
 
 
-#Please change the path to one that includes the following files:
+# Please change the path to one that includes the following files:
 # "Sample_Membrane_Treatment_Plant_Data" spreadsheet
 # HSMaster - Hazen and Sawyer.rda"
 setwd("/Users/cyrilpillai/Desktop/Data_Processing")
