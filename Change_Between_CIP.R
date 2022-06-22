@@ -87,19 +87,19 @@ for (num in 1:nrow(Change_Data)){
   #data_indices <- data_indices / Change_Data$Time_ON[num]
   
   if (num == 1){
-    if (Change_Data$Time_ON[num] > 100) {
-    plot(data_indices, list, main = "Train 3 Specific Flux Over Time",type = "l",col = colors[num], ylim = c(.075,.09), xlab = "Standardized Time (hours)", ylab = "Specific Flux")
+    #if (Change_Data$Time_ON[num] > 100) {
+    plot(data_indices, list, main = "Train 3 Specific Flux Over Time",type = "l",col = colors[num], ylim = c(.075,.09), xlab = "Time (hours)", ylab = "Specific Flux")
     model <- lm(list ~ data_indices)
     abline(model, col = colors[num])
-    }
+   # }
 
   }
   else{
-    if (Change_Data$Time_ON[num] > 100) {
+   # if (Change_Data$Time_ON[num] > 100) {
     points(data_indices, list, type = "l", col = colors[num])
     model <- lm(list ~ data_indices)
     abline(model, col = colors[num])
-    }
+   # }
    
   }
 }

@@ -44,3 +44,4 @@ legend("topleft",                           # Add legend to plot
        col = c("black","orange", 3,6),
        cex = 0.48,
        horiz = TRUE)
+
