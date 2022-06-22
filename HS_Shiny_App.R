@@ -12,8 +12,11 @@ library(dplyr)
 
 # Load Data Below & then run app #----------------------------------------------
 
-load("HSMaster - Hazen and Sawyer.rda")
-
+#load("HSMaster - Hazen and Sawyer.rda")
+y_axis <- c("Date", "Feedwater_Pressure", "Percent_Recovery", 
+            "Net_Driving_Pressure", "Specific_Flux", "Normalized_Differential_Pressure",
+            "Normalized_Permeate_Conductivity", "Normalized_Permeate_Flow",
+            "Normalized_Salt_Passage")
 Train_1 <- select(HSMaster, starts_with("Date") | ends_with("TR1"))
 
 Train_2 <- select(HSMaster, starts_with("Date") | ends_with("TR2"))
@@ -27,49 +30,39 @@ Train_5 <- select(HSMaster, starts_with("Date") | ends_with("TR5"))
 # Separating Trains into useful variables
 Train_1_Good_Variables <- Train_1[,c("Date_Time", "P_f_TR1", 
                                      "Per_R_a_TR1","Nt_DP_TR1", "Sp_Fl_TR1",
-                                     "DP_n_TR1", "NCp_TR1")]
+                                     "DP_n_TR1", "NCp_TR1", "F_p_n_TR1",
+                                     "SP_n_TR1")]
 
 Train_2_Good_Variables <- Train_2[,c("Date_Time", "P_f_TR2", 
                                      "Per_R_a_TR2","Nt_DP_TR2", "Sp_Fl_TR2",
-                                     "DP_n_TR2", "NCp_TR2")]
+                                     "DP_n_TR2", "NCp_TR2", "F_p_n_TR2",
+                                     "SP_n_TR2")]
 
 Train_3_Good_Variables <- Train_3[,c("Date_Time","P_f_TR3", 
                                      "Per_R_a_TR3","Nt_DP_TR3", "Sp_Fl_TR3",
-                                     "DP_n_TR3", "NCp_TR3")]
+                                     "DP_n_TR3", "NCp_TR3", "F_p_n_TR3",
+                                     "SP_n_TR3")]
 
 Train_4_Good_Variables <- Train_4[,c("Date_Time","P_f_TR4", 
                                      "Per_R_a_TR4","Nt_DP_TR4", "Sp_Fl_TR4",
-                                     "DP_n_TR4", "NCp_TR4")]
+                                     "DP_n_TR4", "NCp_TR4", "F_p_n_TR4",
+                                     "SP_n_TR4")]
 
 Train_5_Good_Variables <- Train_5[,c("Date_Time","P_f_TR5", 
                                      "Per_R_a_TR5","Nt_DP_TR5", "Sp_Fl_TR5",
-                                     "DP_n_TR5", "NCp_TR5")]
+                                     "DP_n_TR5", "NCp_TR5", "F_p_n_TR5",
+                                     "SP_n_TR5")]
 
 # Rename the Variables to more fitting names for each train
-colnames(Train_1_Good_Variables) <- c("Date", "Feedwater_Pressure", "Percent_Recovery", 
-                                      "Net_Driving_Pressure", "Specific_Flux",
-                                      "Normalized_Differential_Pressure",
-                                      "Normalized_Permeate_Conductivity")
+colnames(Train_1_Good_Variables) <- y_axis
 
-colnames(Train_2_Good_Variables) <- c("Date", "Feedwater_Pressure", "Percent_Recovery", 
-                                      "Net_Driving_Pressure", "Specific_Flux",
-                                      "Normalized_Differential_Pressure",
-                                      "Normalized_Permeate_Conductivity")
+colnames(Train_2_Good_Variables) <- y_axis
 
-colnames(Train_3_Good_Variables) <- c("Date", "Feedwater_Pressure", "Percent_Recovery", 
-                                      "Net_Driving_Pressure", "Specific_Flux",
-                                      "Normalized_Differential_Pressure",
-                                      "Normalized_Permeate_Conductivity")
+colnames(Train_3_Good_Variables) <- y_axis
 
-colnames(Train_4_Good_Variables) <- c("Date", "Feedwater_Pressure", "Percent_Recovery", 
-                                      "Net_Driving_Pressure", "Specific_Flux",
-                                      "Normalized_Differential_Pressure",
-                                      "Normalized_Permeate_Conductivity")
+colnames(Train_4_Good_Variables) <- y_axis
 
-colnames(Train_5_Good_Variables) <- c("Date", "Feedwater_Pressure", "Percent_Recovery", 
-                                      "Net_Driving_Pressure", "Specific_Flux",
-                                      "Normalized_Differential_Pressure",
-                                      "Normalized_Permeate_Conductivity")
+colnames(Train_5_Good_Variables) <-y_axis
 #-------------------------------------------------------------------------------
 
 ############################
@@ -78,15 +71,19 @@ colnames(Train_5_Good_Variables) <- c("Date", "Feedwater_Pressure", "Percent_Rec
 # "Feed/Brine Conductivity" = "C_fb_a_TR1",
 # "Feed/Brine Osmotic Pressure" = "OP_fb_a_TR1", 
 # "Permeate Osmotic Pressure" = "OP_p_a_TR1",
-# "Percent Salt Passage" = "SP_a_TR1", "Normalized Salt Passage" = "SP_n_TR1", 
+# "Percent Salt Passage" = "SP_a_TR1", 
+# "Normalized Salt Passage" = "SP_n_TR1", 
 # "Net Driving Pressure at Actual Conditions" = "NetDp_a_TR1", 
 # "Normalized Permeate Flow" = "F_p_n_TR1", 
 # "Normalized Differential Pressure" = "DP_n_TR1", 
 # "Normalized Differential Pressure Stage 1" = "DP_n_s1_TR1", 
 # "Normalized Differential Pressure Stage 2" = "DP_n_s2_TR1", 
 # "Average Osmotic Pressure Gradient" = "OP_TR1",
-# "Net Driving Pressure" = "Nt_DP_TR1", "Flux" = "Flux_TR1",
-# "Specific Flux" = "Sp_Fl_TR1", "Normalized Permeate Conductivity" = "NCp_TR1"
+# "Net Driving Pressure" = "Nt_DP_TR1", 
+# "Flux" = "Flux_TR1",
+# "Specific Flux" = "Sp_Fl_TR1", 
+# "Normalized Permeate Conductivity" = "NCp_TR1"
+# Normalized Permeate Flow = "F_p_n_TRx"
 ############################
   
 # Define UI ----
@@ -117,12 +114,7 @@ ui <- fluidPage(
                  selectInput(
                    inputId = "y1",
                    label = h3("Y-axis"),
-                   choices = c(
-                     "Feedwater_Pressure", "Percent_Recovery", 
-                     "Net_Driving_Pressure", "Specific_Flux",
-                     "Normalized_Differential_Pressure",
-                     "Normalized_Permeate_Conductivity"
-                   ),
+                   choices = y_axis,
                    selected = "Feedwater_Pressure"
                  ),
                  
@@ -158,12 +150,7 @@ ui <- fluidPage(
                   selectInput(
                    inputId = "y2",
                    label = h3("Y-axis"),
-                   choices = c(
-                     "Feedwater_Pressure", "Percent_Recovery", 
-                     "Net_Driving_Pressure", "Specific_Flux",
-                     "Normalized_Differential_Pressure",
-                     "Normalized_Permeate_Conductivity"
-                   ),
+                   choices = y_axis,
                    selected = "Feedwater_Pressure"
                  ),
                  
@@ -197,12 +184,7 @@ ui <- fluidPage(
                   selectInput(
                    inputId = "y3",
                    label = h3("Y-axis"),
-                   choices = c(
-                     "Feedwater_Pressure", "Percent_Recovery", 
-                     "Net_Driving_Pressure", "Specific_Flux",
-                     "Normalized_Differential_Pressure",
-                     "Normalized_Permeate_Conductivity"
-                   ),
+                   choices = y_axis,
                    selected = "Feedwater_Pressure"
                   ),
                  
@@ -236,12 +218,7 @@ ui <- fluidPage(
                  selectInput(
                    inputId = "y4",
                    label = h3("Y-axis"),
-                   choices = c(
-                     "Feedwater_Pressure", "Percent_Recovery", 
-                     "Net_Driving_Pressure", "Specific_Flux",
-                     "Normalized_Differential_Pressure",
-                     "Normalized_Permeate_Conductivity"
-                   ),
+                   choices = y_axis,
                    selected = "Feedwater_Pressure"
                  ),
                 
@@ -275,12 +252,7 @@ ui <- fluidPage(
                   selectInput(
                    inputId = "y5",
                    label = h3("Y-axis"),
-                   choices = c(
-                     "Feedwater_Pressure", "Percent_Recovery", 
-                     "Net_Driving_Pressure", "Specific_Flux",
-                     "Normalized_Differential_Pressure",
-                     "Normalized_Permeate_Conductivity"
-                   ),
+                   choices = y_axis,
                    selected = "Feedwater_Pressure"
                   ),
                  
