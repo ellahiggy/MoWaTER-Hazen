@@ -12,8 +12,10 @@ library(dplyr)
 
 # Set Directory, Load Data Below & then run app #----------------------------------------------
 
-setwd("~/Desktop/Data/MoWaTER-Hazen")
+setwd("~/Desktop/Data")
 load("HSMaster - Hazen and Sawyer.rda")
+
+setwd("~/Desktop/Data/MoWaTER-Hazen")
 
 y_axis <- c("Date", "Feedwater_Pressure", "Percent_Recovery", 
             "Net_Driving_Pressure", "Specific_Flux", "Normalized_Differential_Pressure",
@@ -121,7 +123,7 @@ ui <- fluidPage(
                  ),
                  
                  dateRangeInput('date',
-                           label = h4('Date Range'),
+                           label = h4(HTML('Date Range <br> (2020-07-21 to 2021-07-06)')),
                            start = min(Train_1_Good_Variables$Date),
                            end =  max(Train_1_Good_Variables$Date)
                  )
@@ -157,7 +159,7 @@ ui <- fluidPage(
                  ),
                  
                  dateRangeInput('date2',
-                                label = h4('Date Range'),
+                                label = h4(HTML('Date Range <br> (2020-07-21 to 2021-07-06)')),
                                 start = min(Train_2_Good_Variables$Date),
                                 end =  max(Train_2_Good_Variables$Date)
                  )
@@ -191,8 +193,8 @@ ui <- fluidPage(
                   ),
                  
                  dateRangeInput('date3',
-                                label = h4('Date Range'),
-                                start = min(Train_3_Good_Variables$Date),
+                                label = h4(HTML('Date Range <br> (2020-07-21 to 2021-07-06)')),
+                                start = min(Train_4_Good_Variables$Date),
                                 end =  max(Train_3_Good_Variables$Date)
                  )
                ),
@@ -225,7 +227,7 @@ ui <- fluidPage(
                  ),
                 
                   dateRangeInput('date4',
-                                label = h4('Date Range'),
+                                label = h4(HTML('Date Range <br> (2020-07-21 to 2021-07-06)')),
                                 start = min(Train_4_Good_Variables$Date),
                                 end =  max(Train_4_Good_Variables$Date)
                  )
@@ -259,7 +261,7 @@ ui <- fluidPage(
                   ),
                  
                  dateRangeInput('date5',
-                                label = h4('Date Range'),
+                                label = h4(HTML('Date Range <br> (2020-07-21 to 2021-07-06)')),
                                 start = min(Train_5_Good_Variables$Date),
                                 end =  max(Train_5_Good_Variables$Date)
                  )
