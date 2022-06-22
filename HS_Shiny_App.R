@@ -10,9 +10,11 @@ library(shinythemes)
 library(plotly)
 library(dplyr)
 
-# Load Data Below & then run app #----------------------------------------------
+# Set Directory, Load Data Below & then run app #----------------------------------------------
 
-#load("HSMaster - Hazen and Sawyer.rda")
+setwd("~/Desktop/Data/MoWaTER-Hazen")
+load("HSMaster - Hazen and Sawyer.rda")
+
 y_axis <- c("Date", "Feedwater_Pressure", "Percent_Recovery", 
             "Net_Driving_Pressure", "Specific_Flux", "Normalized_Differential_Pressure",
             "Normalized_Permeate_Conductivity", "Normalized_Permeate_Flow",
