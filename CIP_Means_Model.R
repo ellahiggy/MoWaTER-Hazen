@@ -55,8 +55,8 @@ Changes_Between_CIP_DF <- as.data.frame(matrix(ncol= 3))
 colnames(Changes_Between_CIP_DF) <- c("Sp_Fl","Nt_DP","P_f")
 
 # Create new data frame to append to with the Percent Change of 4 selected variables 
-Changes_Percent_Between_CIP_DF <- as.data.frame(matrix(ncol= 3))
-colnames(Changes_Percent_Between_CIP_DF) <- c("Sp_Fl","Nt_DP","P_f")
+Changes_Percent_Between_CIP_DF <- as.data.frame(matrix(ncol= 5))
+colnames(Changes_Percent_Between_CIP_DF) <- c("Sp_Fl","Nt_DP","P_f","Start_Index","End_Index")
 
 df_index <- 1
 
@@ -84,7 +84,9 @@ for (value in 2:nrow(Train4_ON_Change)){
     List_of_Percent_Changes <- append(List_of_Percent_Changes,Percent_Change)
   }
   Changes_Between_CIP_DF[df_index,] <- List_of_Changes 
-  Changes_Percent_Between_CIP_DF[df_index,] <- List_of_Percent_Changes
+  Start_End <- c(First_Index,Last_Index)
+  Row <- append(List_of_Percent_Changes,Start_End)
+  Changes_Percent_Between_CIP_DF[df_index,] <- Row
   df_index <<- df_index + 1
 }
 
