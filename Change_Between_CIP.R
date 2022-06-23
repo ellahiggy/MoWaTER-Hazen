@@ -1,3 +1,4 @@
+# Have to run code in raw_to_clean_data file first
 
 #Data general to all trains
 General <- HSMaster[, c("Date_Time", "T_f_CO", "TCF_a")]
@@ -90,11 +91,33 @@ for (num in 2:nrow(Data_ON_Change)){
 
 Train3_ON_Change = Data_ON_Change  
 
+<<<<<<< HEAD
 for (num in 2:nrow(Train3_ON_Change)){
 }
 
  
  # ------------------------------------------------------------------------------
+=======
+#-------------------------------------------------------------------------------
+# If statements to add columns of dates for when the train is On & Off
+i <- 1
+
+# Replace "*_*" with Train number dataframe
+
+# Date when train was turned on
+if(i <= length(Train*_*_ON_Change$Start_Index)) {
+  Train_On_Date <- data_ONOFF$Date_Time[Train*_*_ON_Change$Start_Index]
+  Train*_*_ON_Change$Train_On_Date <- Train_On_Date
+}
+# Date when train was turned off
+if(i <= length(Train*_*_ON_Change$End_Index)) {
+  Train_Off_Date <- data_ONOFF$Date_Time[Train*_*_ON_Change$End_Index]
+  Train*_*_ON_Change$Train_Off_Date <- Train_Off_Date
+}
+#-------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+>>>>>>> 5ffd814c760d6a1ac806ec5feae8715d540cb720
  
 ### Train 3 Specific Flux
 
