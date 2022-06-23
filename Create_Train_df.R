@@ -162,10 +162,10 @@ x_3 <- List_of_Percent_Changes[3]
 x_4 <- List_of_Percent_Changes[4]
 
 
-CIP_Variable <- ( 1/Percent_Means_List[1] * (x_1) 
-                  + 1/Percent_Means_List[2]*(x_2) 
-                  + 1/Percent_Means_List[3]*(x_3) 
-                  + 1/Percent_Means_List[4]*(x_4))
+CIP_Variable <- ( 1/Percent_Means_List_CIP[1] * (x_1) 
+                  + 1/Percent_Means_List_CIP[2]*(x_2) 
+                  + 1/Percent_Means_List_CIP[3]*(x_3) 
+                  + 1/Percent_Means_List_CIP[4]*(x_4))
 
 # ------------------------------------------------------------------------------
 
