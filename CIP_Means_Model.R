@@ -45,28 +45,25 @@ Train_3_Jan_thru_Apr <- Train_3[Train_3$Date_Time >= "2021-01-21 00:00:00" &
 Train_5_Apr <- Train_5[Train_5$Date_Time >= "2021-04-05 00:00:00" & 
                          Train_5$Date_Time <= "2021-04-27 02:00:00",]
 
-# ------------------------------------------------------------------------------
-
-Train4_ON_Change <- subset(Train4_ON_Change,Time_ON > 1)
-
 #-------------------------------------------------------------------------------
 # Create new data frame to append to with the Change of 4 selected variables 
 Changes_Between_CIP_DF <- as.data.frame(matrix(ncol= 3))
 colnames(Changes_Between_CIP_DF) <- c("Sp_Fl","Nt_DP","P_f")
 
 # Create new data frame to append to with the Percent Change of 4 selected variables 
-Changes_Percent_Between_CIP_DF <- as.data.frame(matrix(ncol= 5))
-colnames(Changes_Percent_Between_CIP_DF) <- c("Sp_Fl","Nt_DP","P_f","Start_Index","End_Index")
+Changes_Percent_Between_CIP_DF <- as.data.frame(matrix(ncol= 6))
+colnames(Changes_Percent_Between_CIP_DF) <- c("Sp_Fl","Nt_DP","P_f","Start_Index","End_Index","Train_Num")
 
 df_index <- 1
 
 # ------------------------------------------------------------------------------
 
-for (value in 2:nrow(Train4_ON_Change)){
-  First_Index <- Train4_ON_Change$Start_Index[value]
-  Last_Index <- Train4_ON_Change$End_Index[value]
-  Train_Data_ON <- Train_4[Train_4$Index >= First_Index & 
-                             Train_4$Index <= Last_Index,]
+
+for (value in 2:nrow(Train4_ON_Change)){ #Change Train Number
+  First_Index <- Train4_ON_Change$Start_Index[value] #Change Train Number
+  Last_Index <- Train4_ON_Change$End_Index[value] #Change Train Number
+  Train_Data_ON <- Train_4[Train_4$Index >= First_Index & #Change Train Number
+                             Train_4$Index <= Last_Index,] #Change Train Number
   List_of_Changes <- c()
   List_of_Percent_Changes <- c()
   
@@ -84,7 +81,7 @@ for (value in 2:nrow(Train4_ON_Change)){
     List_of_Percent_Changes <- append(List_of_Percent_Changes,Percent_Change)
   }
   Changes_Between_CIP_DF[df_index,] <- List_of_Changes 
-  Start_End <- c(First_Index,Last_Index)
+  Start_End <- c(First_Index,Last_Index,4) #Change Train Number
   Row <- append(List_of_Percent_Changes,Start_End)
   Changes_Percent_Between_CIP_DF[df_index,] <- Row
   df_index <<- df_index + 1
@@ -108,7 +105,7 @@ for (row in 1:nrow(Changes_Percent_Between_CIP_DF)){
       }
     }
   }
-  if (sum >= 2){
+  if (sum >= 3){
     Changes_Percent_Between_CIP_DF$CIP[row] <- 1
   }
 }

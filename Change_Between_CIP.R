@@ -37,7 +37,7 @@ colnames(Train_5) <- vars
 
 # Add Train Number below and remove comment
 
-data_ONOFF <- Train_3
+data_ONOFF <- Train_4
 
 data_ONOFF$ON_Count <- 0
 
@@ -50,12 +50,12 @@ on <- 0
 len <- nrow(data_ONOFF)
 
 for (num in 1:len) {
-  if (data_ONOFF$ON_OFF[num] == 0|is.na(data_ONOFF$ON_OFF[num])|is.null(data_ONOFF$ON_OFF[num])){
+  if (data_ONOFF$ON_OFF[num] == 0|is.na(data_ONOFF$ON_OFF[num])){
     data_ONOFF$ON_Count[num] <- 0
   }else {
     if (num == 1){
       on <<- on + 1
-    }else if (data_ONOFF$ON_OFF[num-1] == 0|is.na(data_ONOFF$ON_OFF[num-1])|is.null(data_ONOFF$ON_OFF[num-1])){
+    }else if (data_ONOFF$ON_OFF[num-1] == 0|is.na(data_ONOFF$ON_OFF[num-1])){
       on <<- on + 1
     }
     data_ONOFF$ON_Count[num] <- on
@@ -90,7 +90,7 @@ for (num in 2:nrow(Data_ON_Change)){
 Data_ON_Change <- subset(Data_ON_Change, Time_ON > 1)
 
 
-Train3_ON_Change = Data_ON_Change  
+Train4_ON_Change = Data_ON_Change  
 
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
