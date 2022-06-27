@@ -24,18 +24,18 @@ MoWaTER_Hazen
 A collection of 10 dataframes: one for each train (totaling 5), one for each time each train is on (also totaling 5).
 For each data object in the list, fill in the following:
 
-\strong{(1)} \code{Train_1} is a dataframe with 8,376 rows and 9 columns, with the variables below: 
+\strong{(1)} \code{Train_1 to Train_5} is a dataframe with 8,376 rows and 9 columns, with the variables below: 
 
 \describe{
 \item{\code{Date_Time}}{A measure of the date and its corresponding time. (Year-Month-Day; Hour-Min-Sec)}
 \item{\code{Sp_Fl}}{description (with units)}
-\item{\code{Nt_DP}}{Measurement of the pressure difference between influent and effluent water. (with units)}
-\item{\code{NCp}}{Measurement of the conductivity of the water that leaves the filtration system. The measurement is normalized based on a calculation done by Hazen and Sawyer's client. (with units)}
-\item{\code{Per_R_a}}{description (with units)}
-\item{\code{P_f}}{description (with units)}
-\item{\code{SP_n}}{description (with units)}
-\item{\code{ON_OFF}}{description (with units)}
-\item{\code{Index}}{description (with units)}
+\item{\code{Nt_DP}}{A measurement of the pressure difference between influent and effluent water. (with units)}
+\item{\code{NCp}}{A measurement of the conductivity of the water that leaves the filtration system. The measurement is normalized based on a calculation done by Hazen and Sawyer's client. (with units)}
+\item{\code{Per_R_a}}{A measurement of the percent of water recovered after being filtered through the train systems. (Percent)}
+\item{\code{P_f}}{A measurement of the amount of water that leaves the system after being filtered. (with units)}
+\item{\code{SP_n}}{A measurement of the amount of salt that passes through the filtration system. (with units)}
+\item{\code{ON_OFF}}{A binary measurement to determine whether the trains are on (represented by 1) or off (represented by 0).}
+\item{\code{Index}}{Assigns a number to each row that helps with separating CIPs based on index number.}
 }
 
 \strong{(1)} \code{project_name$data_object2} is a... (describe the structure and dimensions).  
