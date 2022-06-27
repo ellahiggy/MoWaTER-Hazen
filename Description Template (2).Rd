@@ -7,10 +7,7 @@
 
 \description{
 % this paragraph should contain full sentences that would answer these questions for someone who has never seen this data before
-This data came from Hazen and Sawyer, an environmental engineering firm who focuses on providing their clients with clean drinking water. This specific data came from one of Hazen and Sawyer's confidential clients and contained over 200 variables with more than 8000 observations with information on measurements that the client used to determine when a clean in place (CIP) process should occur for the filtration system. However, the 200 variables are separated between the five trains contained in filtration system; therefore, there are approximately 30 repeated variables for each train. ****We used a linear regression model with our response variable being the change in percent between CIPs for each predictor variable. The predictor variables were specific flux, normalized permeate conductivity, net driving pressure, feedwater pressure, and normalized differential pressure. Additionally, we used multiple cleaned data frames that contained data specific for each of the five trains.****
-
-
-Where did this data come from? What does it tell you? What type(s) of model was used? What is the response variable of interest? Are there specific predictor variables of interest? If there is more than one clean data frame, what is the difference between them?
+This data came from Hazen and Sawyer, an environmental engineering firm who focuses on providing their clients with clean drinking water. This specific data came from one of Hazen and Sawyer's confidential clients and contained over 200 variables with more than 8000 observations with information on measurements that the client used to determine when a clean in place (CIP) process should occur for the filtration system. However, the 200 variables are separated between the five trains contained in filtration system; therefore, there are approximately 30 repeated variables for each train. ****We used a linear regression model with our response variable being the change in percent between CIPs for each predictor variable. The predictor variables were specific flux, normalized permeate conductivity, net driving pressure, feedwater pressure, and normalized differential pressure. Additionally, we used multiple cleaned data frames that contained data specific for each of the five trains and when they were on and off.****
 }
 
 
@@ -41,11 +38,11 @@ For each data object in the list, fill in the following:
 \strong{(1)} \code{Train1_ON_Change} is a data frame with 18 rows and 5 columns, the variables of which are as follows:
 
 \describe{
-\item{\code{ON_Count}}{description (with units)}
-\item{\code{Start_Index}}{description (with units)}
-\item{\code{End_Index}}{description (with units)}
-\item{\code{Time_ON}}{description (with units)}
-\item{\code{Time_of_CIP}}{description (with units)}
+\item{\code{ON_Count}}{A numerical count of when the train was on after a CIP occurred.}
+\item{\code{Start_Index}}{Row number of when the train is turned on.}
+\item{\code{End_Index}}{Row number of when the train is turned off.}
+\item{\code{Time_ON}}{The amount of hours that the train was turned on for. (hours)}
+\item{\code{Time_of_CIP}}{Length of how long the  (with units)}
 }
 
 }
