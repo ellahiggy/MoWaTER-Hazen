@@ -1,31 +1,31 @@
 
 General <- HSMaster[, c("Date_Time", "T_f_CO", "TCF_a")]
 
-vars <- c("Date_Time","Sp_Fl","Nt_DP","P_f","Index")
+vars <- c("Date_Time","Sp_Fl","Nt_DP","P_f","DP_n","NCp","Index")
 
 
 #Data for each variable by Train, as detailed above
-Train_1 <- HSMaster[,c("Date_Time", "Sp_Fl_TR1", "Nt_DP_TR1", 
+Train_1 <- HSMaster[,c("Date_Time", "Sp_Fl_TR1", "Nt_DP_TR1","DP_n_TR1","NCp_TR1", 
                        "P_f_TR1")]
 Train_1$index <- 1:nrow(Train_1)
 colnames(Train_1) <- vars
 
-Train_2 <- HSMaster[,c("Date_Time", "Sp_Fl_TR2", "Nt_DP_TR2", 
+Train_2 <- HSMaster[,c("Date_Time", "Sp_Fl_TR2", "Nt_DP_TR2", "DP_n_TR2","NCp_TR2",
                        "P_f_TR2")]
 Train_2$index <- 1:nrow(Train_2)
 colnames(Train_2) <- vars
 
-Train_3 <- HSMaster[,c("Date_Time", "Sp_Fl_TR3", "Nt_DP_TR3", 
+Train_3 <- HSMaster[,c("Date_Time", "Sp_Fl_TR3", "Nt_DP_TR3", "DP_n_TR3","NCp_TR3",
                        "P_f_TR3")]
 Train_3$index <- 1:nrow(Train_3)
 colnames(Train_3) <- vars
 
-Train_4 <- HSMaster[,c("Date_Time", "Sp_Fl_TR4", "Nt_DP_TR4", 
+Train_4 <- HSMaster[,c("Date_Time", "Sp_Fl_TR4", "Nt_DP_TR4", "DP_n_TR4","NCp_TR4",
                        "P_f_TR4")]
 Train_4$index <- 1:nrow(Train_4)
 colnames(Train_4) <- vars
 
-Train_5 <- HSMaster[,c("Date_Time", "Sp_Fl_TR5", "Nt_DP_TR5", 
+Train_5 <- HSMaster[,c("Date_Time", "Sp_Fl_TR5", "Nt_DP_TR5", "DP_n_TR5","NCp_TR5",
                        "P_f_TR5")]
 Train_5$index <- 1:nrow(Train_5)
 colnames(Train_5) <- vars
@@ -51,27 +51,28 @@ Changes_Between_CIP_DF <- as.data.frame(matrix(ncol= 3))
 colnames(Changes_Between_CIP_DF) <- c("Sp_Fl","Nt_DP","P_f")
 
 # Create new data frame to append to with the Percent Change of 4 selected variables 
-Changes_Percent_Between_CIP_DF <- as.data.frame(matrix(ncol= 6))
-colnames(Changes_Percent_Between_CIP_DF) <- c("Sp_Fl","Nt_DP","P_f","Start_Index","End_Index","Train_Num")
+Changes_Percent_Between_CIP_DF <- as.data.frame(matrix(ncol= 8))
+colnames(Changes_Percent_Between_CIP_DF) <- c("Sp_Fl","Nt_DP","P_f","DP_n","NCp","Start_Index","End_Index","Train_Num")
 
 df_index <- 1
 
-Changes_Percent_Between_CIP_DF_Test <- as.data.frame(matrix(ncol= 6))
-colnames(Changes_Percent_Between_CIP_DF_Test) <- c("Sp_Fl","Nt_DP","P_f","Start_Index","End_Index","Train_Num")
+Changes_Percent_Between_CIP_DF_Test <- as.data.frame(matrix(ncol= 8))
+colnames(Changes_Percent_Between_CIP_DF_Test) <- c("Sp_Fl","Nt_DP","P_f","DP_n","NCp","Start_Index","End_Index","Train_Num")
 
 
 # ------------------------------------------------------------------------------
 
+### Train 3 --------------
 
-for (value in 2:nrow(Train5_ON_Change)){ #Change Train Number
-  First_Index <- Train5_ON_Change$Start_Index[value] #Change Train Number
-  Last_Index <- Train5_ON_Change$End_Index[value] #Change Train Number
-  Train_Data_ON <- Train_5[Train_5$Index >= First_Index & #Change Train Number
-                             Train_5$Index <= Last_Index,] #Change Train Number
+for (value in 2:nrow(Train3_ON_Change)){ #Change Train Number
+  First_Index <- Train3_ON_Change$Start_Index[value] #Change Train Number
+  Last_Index <- Train3_ON_Change$End_Index[value] #Change Train Number
+  Train_Data_ON <- Train_3[Train_3$Index >= First_Index & #Change Train Number
+                             Train_3$Index <= Last_Index,] #Change Train Number
   List_of_Changes <- c()
   List_of_Percent_Changes <- c()
   
-  for (num in 2:4){
+  for (num in 2:6){
     #plot(Train_Data_ON[,num] ~ Train_Data_ON$Index)
     model <- lm(Train_Data_ON[,num] ~ Train_Data_ON$Index)
     #abline(model, col = 'red')
@@ -84,40 +85,99 @@ for (value in 2:nrow(Train5_ON_Change)){ #Change Train Number
     Percent_Change <- change / Start_Val
     List_of_Percent_Changes <- append(List_of_Percent_Changes,Percent_Change)
   }
-  Changes_Between_CIP_DF[df_index,] <- List_of_Changes 
+  Start_End <- c(First_Index,Last_Index,3) #Change Train Number
+  Row <- append(List_of_Percent_Changes,Start_End)
+  Changes_Percent_Between_CIP_DF[df_index,] <- Row
+  df_index <<- df_index + 1
+}
+
+### Train 4 --------------
+
+for (value in 2:nrow(Train4_ON_Change)){ #Change Train Number
+  First_Index <- Train4_ON_Change$Start_Index[value] #Change Train Number
+  Last_Index <- Train4_ON_Change$End_Index[value] #Change Train Number
+  Train_Data_ON <- Train_4[Train_4$Index >= First_Index & #Change Train Number
+                             Train_4$Index <= Last_Index,] #Change Train Number
+  List_of_Changes <- c()
+  List_of_Percent_Changes <- c()
+  
+  for (num in 2:6){
+    #plot(Train_Data_ON[,num] ~ Train_Data_ON$Index)
+    model <- lm(Train_Data_ON[,num] ~ Train_Data_ON$Index)
+    #abline(model, col = 'red')
+    slope <- as.numeric(model$coefficients[2])
+    intercept <- as.numeric(model$coefficients[1])
+    #time <- as.integer(difftime("2021-04-29 02:00:00","2021-01-21 00:00:00",units = c("hours")))
+    change <- slope * nrow(Train_Data_ON)
+    List_of_Changes <- append(List_of_Changes,change)
+    Start_Val <- (slope * Train_Data_ON$Index[1] + intercept)
+    Percent_Change <- change / Start_Val
+    List_of_Percent_Changes <- append(List_of_Percent_Changes,Percent_Change)
+  }
+  Start_End <- c(First_Index,Last_Index,4) #Change Train Number
+  Row <- append(List_of_Percent_Changes,Start_End)
+  Changes_Percent_Between_CIP_DF[df_index,] <- Row
+  df_index <<- df_index + 1
+}
+
+### Train 5 --------------
+
+for (value in 2:nrow(Train5_ON_Change)){ #Change Train Number
+  First_Index <- Train5_ON_Change$Start_Index[value] #Change Train Number
+  Last_Index <- Train5_ON_Change$End_Index[value] #Change Train Number
+  Train_Data_ON <- Train_5[Train_5$Index >= First_Index & #Change Train Number
+                             Train_5$Index <= Last_Index,] #Change Train Number
+  List_of_Changes <- c()
+  List_of_Percent_Changes <- c()
+  
+  for (num in 2:6){
+    #plot(Train_Data_ON[,num] ~ Train_Data_ON$Index)
+    model <- lm(Train_Data_ON[,num] ~ Train_Data_ON$Index)
+    #abline(model, col = 'red')
+    slope <- as.numeric(model$coefficients[2])
+    intercept <- as.numeric(model$coefficients[1])
+    #time <- as.integer(difftime("2021-04-29 02:00:00","2021-01-21 00:00:00",units = c("hours")))
+    change <- slope * nrow(Train_Data_ON)
+    List_of_Changes <- append(List_of_Changes,change)
+    Start_Val <- (slope * Train_Data_ON$Index[1] + intercept)
+    Percent_Change <- change / Start_Val
+    List_of_Percent_Changes <- append(List_of_Percent_Changes,Percent_Change)
+  }
   Start_End <- c(First_Index,Last_Index,5) #Change Train Number
   Row <- append(List_of_Percent_Changes,Start_End)
-  Changes_Percent_Between_CIP_DF_Test[df_index,] <- Row
+  Changes_Percent_Between_CIP_DF[df_index,] <- Row
   df_index <<- df_index + 1
 }
 
 #---------------------------------------------------------------------------------
 
-Percent_Means_List <- as.numeric(colMeans(Changes_Percent_Between_CIP_DF_Test))
-Changes_Percent_Between_CIP_DF_Test$CIP <- 0
+Percent_Means_List <- as.numeric(colMeans(Changes_Percent_Between_CIP_DF))
+Changes_Percent_Between_CIP_DF$CIP <- 0
 
-for (row in 1:nrow(Changes_Percent_Between_CIP_DF_Test)){
+for (row in 1:nrow(Changes_Percent_Between_CIP_DF)){
   sum = 0
-  for(col in 1:3){
+  for(col in 1:5){
     if(Percent_Means_List[col] < 0){
-      if (Changes_Percent_Between_CIP_DF_Test[row,col] < Percent_Means_List[col]){
+      if (Changes_Percent_Between_CIP_DF[row,col] < Percent_Means_List[col]){
         sum = sum + 1
       }
     }else{
-      if (Changes_Percent_Between_CIP_DF_Test[row,col] > Percent_Means_List[col]){
+      if (Changes_Percent_Between_CIP_DF[row,col] > Percent_Means_List[col]){
         sum = sum + 1
       }
     }
   }
-  if (sum >= 3){
-    Changes_Percent_Between_CIP_DF_Test$CIP[row] <- 1
+  if (sum >= 4){
+    Changes_Percent_Between_CIP_DF$CIP[row] <- 1
   }
 }
 
 
-sum(Changes_Percent_Between_CIP_DF_Test$CIP)
+sum(Changes_Percent_Between_CIP_DF$CIP)
 
 # -------------------------------------------------------------------------------
+
+### Manual Model ------------
 
 # Set Data Here
 Train_3_Jan_thru_Apr <- Train_3[Train_3$Date_Time >= "2021-01-21 00:00:00" & 
@@ -158,31 +218,37 @@ CIP_Variable <- ( 1/Percent_Means_List_CIP[1] * (x_1)
 
 #-----------------------------------------------------------------------
 
-#linear model/logistic model
+### linear model --------------
+
+model <- lm(Changes_Percent_Between_CIP_DF$CIP ~
+     Changes_Percent_Between_CIP_DF$Sp_Fl +
+     Changes_Percent_Between_CIP_DF$Nt_DP + 
+     Changes_Percent_Between_CIP_DF$P_f   +
+     Changes_Percent_Between_CIP_DF$DP_n  +
+     Changes_Percent_Between_CIP_DF$NCp)
 
 
-# model <- lm(Changes_Percent_Between_CIP_DF$CIP ~
-#      Changes_Percent_Between_CIP_DF$Sp_Fl +
-#      Changes_Percent_Between_CIP_DF$Nt_DP + 
-#      Changes_Percent_Between_CIP_DF$P_f)
-# 
-# 
-# model$coefficients[2]
-# model$coefficients[3]
-# model$coefficients[4]
+model$coefficients[2]
+model$coefficients[3]
+model$coefficients[4]
+model$coefficients[5]
+model$coefficients[6]
+
+for(i in 1:nrow(Changes_Percent_Between_CIP_DF)){
+  output <- model$coefficients[2] * (Changes_Percent_Between_CIP_DF$Sp_Fl[i]) + 
+    model$coefficients[3] * (Changes_Percent_Between_CIP_DF$Nt_DP[i]) + 
+    model$coefficients[4] * (Changes_Percent_Between_CIP_DF$P_f[i])  +
+    model$coefficients[5] * (Changes_Percent_Between_CIP_DF$DP_n[i])  +
+    model$coefficients[6] * (Changes_Percent_Between_CIP_DF$NCp[i])
+  
+    output
+    Changes_Percent_Between_CIP_DF$CIP_Predict[i] <- round(output,1)
+}
 
 
+# ------------------------------------------------------------------------------
 
-
-# for(i in 1:nrow(Changes_Percent_Between_CIP_DF_Test)){
-#   output <- model$coefficients[2] * (Changes_Percent_Between_CIP_DF_Test$Sp_Fl[i]) + 
-#     model$coefficients[3] * (Changes_Percent_Between_CIP_DF_Test$Nt_DP[i]) + 
-#     model$coefficients[4] * (Changes_Percent_Between_CIP_DF_Test$P_f[i])
-#   output
-#   Changes_Percent_Between_CIP_DF_Test$CIP_Predict[i] <- round(output,2)
-# }
-
-
+### Log Model
 
 Log_model <- glm(Changes_Percent_Between_CIP_DF$CIP ~ 
                    Changes_Percent_Between_CIP_DF$Sp_Fl  +
@@ -203,8 +269,8 @@ Changes_Percent_Between_CIP_DF_Test_Vars <- Changes_Percent_Between_CIP_DF_Test[
 
 for (i in 1:nrow(Changes_Percent_Between_CIP_DF_Test_Vars))
 {
-   Changes_Percent_Between_CIP_DF_Test$CIP_Predict[i] <- predict(Log_model, 
-                                      new_data = Changes_Percent_Between_CIP_DF_Test_Vars, type = "response")
+  Changes_Percent_Between_CIP_DF_Test$CIP_Predict[i] <- predict(Log_model, 
+                                                                new_data = Changes_Percent_Between_CIP_DF_Test_Vars, type = "response")
 }
 
 
@@ -255,39 +321,3 @@ summary(model)
 # 1/-10.24168
 # 1/3.86
 # 1/3
-
-
-
-
-
-
-
-# ------------------------------------------------------------------------------
-
-
-Log_model <- glm(Changes_Percent_Between_CIP_DF$CIP ~ 
-                   Changes_Percent_Between_CIP_DF$Sp_Fl  +
-                   Changes_Percent_Between_CIP_DF$Nt_DP +
-                   Changes_Percent_Between_CIP_DF$P_f , 
-                  family=binomial)
-
-summary(Log_model)
-
-
-
-?predict()
-
-
-for (i in 1:nrow(test_data)){
-  test_data$CIP_Predict[i] <- predict()
-}
-
-CIP <- Changes_Percent_Between_CIP_DF$CIP
-flux <- seq(Changes_Percent_Between_CIP_DF$Sp_Fl)
-
-
-plot(CIP ~ flux)
-new_model <- glm(CIP ~ flux, binomial)
-prediction <- predict(new_model,list(flux),type="response")
-lines(flux,prediction, col = "red")
-
