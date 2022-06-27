@@ -61,12 +61,79 @@ Train_5 <- HSMaster[,c("Date_Time", "Sp_Fl_TR5", "Nt_DP_TR5",
 Train_5$index <- 1:nrow(Train_5)
 colnames(Train_5) <- vars
 
+
 # sum(is.null(Train_1)) # 0
 # sum(is.null(Train_2)) # 0
 # sum(is.null(Train_3)) # 0
 # sum(is.null(Train_4)) # 0
 # sum(is.null(Train_5)) # 0
 # No null values in the dataset, all done!
+
+
+#Function to get time periods when each train is on and off
+
+
+train_ONOFF <- function(Train_X)
+{
+  if(!is.data.frame(Train_X)) stop("Train_X must be a df")
+  
+  data_ONOFF <- Train_X
+  
+  data_ONOFF$ON_Count <- 0
+  #data_ONOFF[is.na(data_ONOFF)] = 0
+  #data_ONOFF[is.null(data_ONOFF)] = 0
+  off <- 0
+  on <- 0
+  
+  len <- nrow(data_ONOFF)
+  
+  for (num in 1:len) {
+    if (data_ONOFF$ON_OFF[num] == 0|is.na(data_ONOFF$ON_OFF[num])){
+      data_ONOFF$ON_Count[num] <- 0
+    }else {
+      if (num == 1){
+        on <<- on + 1
+      }else if (data_ONOFF$ON_OFF[num-1] == 0|is.na(data_ONOFF$ON_OFF[num-1])){
+        on <<- on + 1
+      }
+      data_ONOFF$ON_Count[num] <- on
+    }
+  }
+  
+  Data_ON_Number <-  unique(data_ONOFF$ON_Count)
+  Data_ON_Number <- Data_ON_Number[Data_ON_Number != 0]; # without elements that are "b"
+  
+  Data_ON_Change <- as.data.frame(matrix(nrow = max(Data_ON_Number), ncol = 3))
+  colnames(Data_ON_Change) <- c("ON_Count","Start_Index","End_Index")
+
+  for (num in Data_ON_Number){
+    Data_ON_Change$ON_Count[num] <- num
+    Data_ON_Change$Start_Index[num] <- min(which(data_ONOFF$ON_Count == num))
+    Data_ON_Change$End_Index[num] <- max(which(data_ONOFF$ON_Count == num))
+    Data_ON_Change$Time_ON[num] <- max(which(data_ONOFF$ON_Count == num)) - min(which(data_ONOFF$ON_Count == num))
+  }
+
+  Data_ON_Change$Time_of_CIP[1] <- 0
+  for (num in 2:nrow(Data_ON_Change)){
+    Data_ON_Change$Time_of_CIP[num] <- Data_ON_Change$Start_Index[num] - Data_ON_Change$End_Index[num-1]
+  }
+
+  Data_ON_Change <- subset(Data_ON_Change, Time_ON > 1)
+  return(Data_ON_Change)
+}
+
+
+Train5_ON_Change <- train_ONOFF(Train_5)
+
+
+
+
+
+
+
+
+
+
 
 
 # Variables for EDA Plots
@@ -86,7 +153,5 @@ na_time_4_spfl <- Train_4$Date_Time[is.na(Train_4$Sp_Fl_TR4)]
 
 na_values_5_spfl <- as.integer(is.na(Train_5$Sp_Fl_TR5))*mean(Train_5$Sp_Fl_TR5,na.rm=TRUE) 
 na_time_5_spfl <- Train_5$Date_Time[is.na(Train_5$Sp_Fl_TR5)]
-
-
 
 
