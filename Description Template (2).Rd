@@ -15,8 +15,8 @@ Where did this data come from? What does it tell you? What type(s) of model was 
 
 
 \usage{
-data(project_name) #- loads into working environment
-project_name
+data(MoWaTER_Hazen) #- loads into working environment
+MoWaTER_Hazen
 }
 
 \format{
@@ -50,8 +50,10 @@ ex: data frame with 3,285 rows and 6 columns, the variables of which are as foll
 
 \source{
 % fill this in
-Name of stakeholder/company + contact info
-
+Data is provided by Hazen and Sawyer
+Contacts: 
+Javad Roostaei - JRoostaei@hazenandsawyer.com
+Ben Stanford - BStanford@hazenandsawyer.com
 Links to relevant information
 }
 
