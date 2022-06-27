@@ -1,12 +1,14 @@
-\name{project_name} % replace with your project name
-\alias{project_name} % replace with your project name
+\name{MoWaTER_Hazen} % replace with your project name
+\alias{MoWaTER_Hazen} % replace with your project name
 
 \docType{data} % don't change
 
-\title{Full Capitalized Spaced Name Here} % replace with your project full name
+\title{MoWaTER_Hazen_and_Sawyer} % replace with your project full name
 
 \description{
 % this paragraph should contain full sentences that would answer these questions for someone who has never seen this data before
+This data came from Hazen and Sawyer, an environmental engineering firm who focuses on providing their clients with clean drinking water. This specific data came from one of Hazen and Sawyer's confidential clients and contained over 200 variables with more than 8000 observations with information on measurements that the client used to determine when the filtration system needed to be cleaned. However, the 200 variables are separated between the five trains contained in filtration system; therefore, there are approximately 30 repeated variables for each train. 
+
 Where did this data come from? What does it tell you? What type(s) of model was used? What is the response variable of interest? Are there specific predictor variables of interest? If there is more than one clean data frame, what is the difference between them?
 }
 
