@@ -651,180 +651,55 @@ for (num in 2:nrow(Data_ON_Change)){
 
 # ------------------------------------------------------------------------------------------------------
 
-################ IDK WHAT THESE LAST THINGS MEAN HELP ###########################
+### Create plot to show data from every time train was on
 
+## Train 3 Specific Flux
 
+# Create list of colors for our plot
+library(viridis)
+
+colors <- viridis(12)
+
+# Remove the fifth row from the data becasue of an error
 Train3_ON_Change <- Train3_ON_Change[-c(5),]
 
-for (num in 1:nrow(Train3_ON_Change)){
-  x <- Train3_ON_Change$Time_ON[num] / 500
-  data <- Train_3[Train_3$Index[Train3_ON_Change$Start_Index[num]:Train3_ON_Change$End_Index[num]],]
-  list <- data$Sp_Fl
-  data_indices <- c(Train3_ON_Change$Start_Index[num]:Train3_ON_Change$End_Index[num])
-  data_indices <- data_indices - data_indices[1] + 1
-  data_indices <- data_indices / x
-  if (num == 1){
-    plot(data_indices, list, main = "Specific FLux",type = "l",col = num, ylim = c(.075,.09))
-  }
-  else{
-    points(data_indices, list, main = "Specific FLux", type = "l", col = num)
-  }
-}
-
-
-# ------------------------------------------------------------------------------
-
-
-Train3_ON_Change <- Train3_ON_Change[-c(5),]
-
-for (num in 1:nrow(Train3_ON_Change)){
-  data <- Train_3[Train_3$Index[Train3_ON_Change$Start_Index[num]:Train3_ON_Change$End_Index[num]],]
-  list <- data$Sp_Fl
-  y_adjust <- 1 - 
-    
-  x_scale <- Train3_ON_Change$Time_ON[num] / 500
-  data_indices <- c(Train3_ON_Change$Start_Index[num]:Train3_ON_Change$End_Index[num])
-  data_indices <- data_indices - data_indices[1] + 1
-  data_indices <- data_indices / x_scale
-  if (num == 1){
-    plot(data_indices, list, main = "Specific FLux",type = "l",col = num, ylim = c(.075,.09))
-  }
-  else{
-    points(data_indices, list, main = "Specific FLux", type = "l", col = num)
-  }
-}
-
-
-
-# -----------------------------------------------------------------------------
-
-
-# Train 3 Specific Flux
-
-Train3_ON_Change <- Train3_ON_Change[-c(5),]
-
-list_of_change_var <- c()
-#list_of_hours
-
-vecTimes <- paste(month(HSMaster$Date_Time[X$starting_locations]), "-" ,month(HSMaster$Date_Time[X$ending_locations]))
-
-
+# Initialize data sets for the below loop, these can be changed to work with any
+# train 1-5
 
 Change_Data <- Train3_ON_Change
 Train_Data <- Train_3
 
+# For loop which plots Specific Flux for each time the the train was on over top 
+# each other with the same starting point
 for (num in 1:nrow(Change_Data)){
   data <- Train_Data[Train_Data$Index[Change_Data$Start_Index[num]:Change_Data$End_Index[num]],]
-  list <- data$Sp_Fl
+  list <- data$F_p_n
   data_indices <- c(Change_Data$Start_Index[num]:Change_Data$End_Index[num])
   data_indices <- data_indices - data_indices[1] + 1
+  # The below statement standardizes each function over 1 hour 
   #data_indices <- data_indices / Change_Data$Time_ON[num]
   
   if (num == 1){
     if (Change_Data$Time_ON[num] > 100) {
-      plot(data_indices, list, main = "Train 3 Specific Flux over Time",type = "l",col = num, ylim = c(.075,.09), xlab = "Standardized Time", ylab = "Specific Flux")
-      model <- lm(list ~ data_indices)
-      abline(model, col = num)
-      list_of_change_var <- append(list_of_change_var,model$coefficients[2]*Change_Data$Time_ON[num])
+    plot(data_indices, list, main = "Train 3 Specific Flux Over Time",type = "l",col = colors[num], xlab = "Standardized Time (hours)", ylab = "Specific Flux")
+    model <- lm(list ~ data_indices)
+    abline(model, col = colors[num])
     }
-    
+
   }
   else{
     if (Change_Data$Time_ON[num] > 100) {
-      points(data_indices, list, type = "l", col = num)
-      model <- lm(list ~ data_indices)
-      abline(model, col = num)
-      list_of_change_var <- append(list_of_change_var,model$coefficients[2]*Change_Data$Time_ON[num])
+    points(data_indices, list, type = "l", col = colors[num])
+    model <- lm(list ~ data_indices)
+    abline(model, col = colors[num])
     }
-    
+   
   }
 }
 
-barplot(-list_of_change_var)
-
-
-
-# ------------------------------------------------------------------------------
-
-# Train 3 Normalized Salt Passage
-
-Train3_ON_Change <- Train3_ON_Change[-c(5),]
-
-Change_Data <- Train3_ON_Change
-Train_Data <- Train_3
-
-for (num in 1:nrow(Change_Data)){
-  data <- Train_Data[Train_Data$Index[Change_Data$Start_Index[num]:Change_Data$End_Index[num]],]
-  list <- data$SP_n
-  data_indices <- c(Change_Data$Start_Index[num]:Change_Data$End_Index[num])
-  data_indices <- data_indices - data_indices[1] + 1
-  #data_indices <- data_indices / Change_Data$Time_ON[num]
-  
-  if (num == 1){
-    plot(data_indices, list, main = "Train 3 Normalized Salt Passage over Time",type = "l",col = num, ylim = c(1,1.3), xlab = "Standardized Time", ylab = "Normalized Salt Passage")
-  }
-  else{
-    points(data_indices, list, type = "l", col = num)
-  }
-}
-
-
-
-
-# ------------------------------------------------------------------------------
-
-# Train 3 Specific Flux Adjusted Y
-
-plot(Train_3$SP_n ~ Train_3$Date_Time)
-
-
-Train3_ON_Change <- Train3_ON_Change[-c(5),]
-
-Change_Data <- Train3_ON_Change
-Train_Data <- Train_3
-
-for (num in 1:nrow(Change_Data)){
-  data <- Train_Data[Train_Data$Index[Change_Data$Start_Index[num]:Change_Data$End_Index[num]],]
-  list <- data$Sp_Fl
-  y_adjust <- .1 - list[1]
-  list <- list + y_adjust
-  x_scale <- Change_Data$Time_ON[num] / 1
-  data_indices <- c(Change_Data$Start_Index[num]:Change_Data$End_Index[num])
-  data_indices <- data_indices - data_indices[1] + 1
-  data_indices <- data_indices / x_scale
-  if (num == 1){
-    plot(data_indices, list, main = "Specific FLux",type = "l",col = num, ylim = c(.095,.102))
-  }
-  else{
-    points(data_indices, list, main = "Specific FLux", type = "l", col = num)
-  }
-}
-
-
-# --------------
-
-# ------------------------------------------------------------------------------
-
-# Train 3 Net Driving Pressure
-
-Train3_ON_Change <- Train3_ON_Change[-c(5),]
-
-Change_Data <- Train3_ON_Change
-Train_Data <- Train_3
-
-for (num in 1:nrow(Change_Data)){
-  x <- Change_Data$Time_ON[num] / 500
-  data <- Train_Data[Train_Data$Index[Change_Data$Start_Index[num]:Change_Data$End_Index[num]],]
-  list <- data$Nt_DP
-  data_indices <- c(Change_Data$Start_Index[num]:Change_Data$End_Index[num])
-  data_indices <- data_indices - data_indices[1] + 1
-  data_indices <- data_indices / x
-  if (num == 1){
-    plot(data_indices, list, main = "Specific FLux",type = "l",col = num, ylim = c(90,180))
-  }
-  else{
-    points(data_indices, list, main = "Specific FLux", type = "l", col = num)
-  }
-}
+# Add legend displaying colors in order of oldest to newest
+legend("topright", inset = .01, title = "Cycle Number (12 = most recent)",legend= c(1:12)
+       ,fill = colors, horiz=TRUE,cex = 0.45)
+ 
 
 
