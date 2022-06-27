@@ -37,7 +37,7 @@ colnames(Train_5) <- vars
 
 # Add Train Number below and remove comment
 
-data_ONOFF <- Train_4
+data_ONOFF <- Train_5
 
 data_ONOFF$ON_Count <- 0
 
@@ -90,7 +90,7 @@ for (num in 2:nrow(Data_ON_Change)){
 Data_ON_Change <- subset(Data_ON_Change, Time_ON > 1)
 
 
-Train4_ON_Change = Data_ON_Change  
+Train5_ON_Change = Data_ON_Change  
 
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
