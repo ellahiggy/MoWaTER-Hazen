@@ -15,24 +15,27 @@ Where did this data come from? What does it tell you? What type(s) of model was 
 
 
 \usage{
+load("Hazen_Sawyer_Data_Clean.rda`")
 data(MoWaTER_Hazen) #- loads into working environment
 MoWaTER_Hazen
 }
 
 \format{
-What is the structure of the data?
-ex: A list with two elements: a list of data frames and a backwash data frame.
+A collection of 10 dataframes: one for each train (totaling 5), one for each time each train is on (also totaling 5).
 For each data object in the list, fill in the following:
 
-\strong{(1)} \code{project_name$data_object1} is a... (describe the structure and dimensions). 
-ex: list of 16 data frames. Each data frame has 105,384 rows and 5 columns, the variables of which are enumerated as follows:
+\strong{(1)} \code{Train_1} is a dataframe with 8,376 rows and 9 columns, with the variables below: 
 
 \describe{
-\item{\code{variable_1}}{description (with units)}
-\item{\code{variable_2}}{description (with units)}
-\item{\code{variable_3}}{description (with units)}
-\item{\code{variable_4}}{description (with units)}
-\item{\code{variable_5}}{description (with units)}
+\item{\code{Date_Time}}{A measure of the date and its corresponding time. (Year-Month-Day; Hour-Min-Sec)}
+\item{\code{Sp_Fl}}{description (with units)}
+\item{\code{Nt_DP}}{Measurement of the pressure difference between influent and effluent water. (with units)}
+\item{\code{NCp}}{Measurement of the conductivity of the water that leaves the filtration system. The measurement is normalized based on a calculation done by Hazen and Sawyer's client. (with units)}
+\item{\code{Per_R_a}}{description (with units)}
+\item{\code{P_f}}{description (with units)}
+\item{\code{SP_n}}{description (with units)}
+\item{\code{ON_OFF}}{description (with units)}
+\item{\code{Index}}{description (with units)}
 }
 
 \strong{(1)} \code{project_name$data_object2} is a... (describe the structure and dimensions).  
