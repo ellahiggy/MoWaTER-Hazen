@@ -56,21 +56,25 @@ colnames(Changes_Percent_Between_CIP_DF) <- c("Sp_Fl","Nt_DP","P_f","Start_Index
 
 df_index <- 1
 
+Changes_Percent_Between_CIP_DF_Test <- as.data.frame(matrix(ncol= 6))
+colnames(Changes_Percent_Between_CIP_DF_Test) <- c("Sp_Fl","Nt_DP","P_f","Start_Index","End_Index","Train_Num")
+
+
 # ------------------------------------------------------------------------------
 
 
-for (value in 2:nrow(Train4_ON_Change)){ #Change Train Number
-  First_Index <- Train4_ON_Change$Start_Index[value] #Change Train Number
-  Last_Index <- Train4_ON_Change$End_Index[value] #Change Train Number
-  Train_Data_ON <- Train_4[Train_4$Index >= First_Index & #Change Train Number
-                             Train_4$Index <= Last_Index,] #Change Train Number
+for (value in 2:nrow(Train5_ON_Change)){ #Change Train Number
+  First_Index <- Train5_ON_Change$Start_Index[value] #Change Train Number
+  Last_Index <- Train5_ON_Change$End_Index[value] #Change Train Number
+  Train_Data_ON <- Train_5[Train_5$Index >= First_Index & #Change Train Number
+                             Train_5$Index <= Last_Index,] #Change Train Number
   List_of_Changes <- c()
   List_of_Percent_Changes <- c()
   
   for (num in 2:4){
     #plot(Train_Data_ON[,num] ~ Train_Data_ON$Index)
     model <- lm(Train_Data_ON[,num] ~ Train_Data_ON$Index)
-    abline(model, col = 'red')
+    #abline(model, col = 'red')
     slope <- as.numeric(model$coefficients[2])
     intercept <- as.numeric(model$coefficients[1])
     #time <- as.integer(difftime("2021-04-29 02:00:00","2021-01-21 00:00:00",units = c("hours")))
@@ -81,43 +85,43 @@ for (value in 2:nrow(Train4_ON_Change)){ #Change Train Number
     List_of_Percent_Changes <- append(List_of_Percent_Changes,Percent_Change)
   }
   Changes_Between_CIP_DF[df_index,] <- List_of_Changes 
-  Start_End <- c(First_Index,Last_Index,4) #Change Train Number
+  Start_End <- c(First_Index,Last_Index,5) #Change Train Number
   Row <- append(List_of_Percent_Changes,Start_End)
-  Changes_Percent_Between_CIP_DF[df_index,] <- Row
+  Changes_Percent_Between_CIP_DF_Test[df_index,] <- Row
   df_index <<- df_index + 1
 }
 
 #---------------------------------------------------------------------------------
 
-Percent_Means_List <- as.numeric(colMeans(Changes_Percent_Between_CIP_DF))
-Changes_Percent_Between_CIP_DF$CIP <- 0
+Percent_Means_List <- as.numeric(colMeans(Changes_Percent_Between_CIP_DF_Test))
+Changes_Percent_Between_CIP_DF_Test$CIP <- 0
 
-for (row in 1:nrow(Changes_Percent_Between_CIP_DF)){
+for (row in 1:nrow(Changes_Percent_Between_CIP_DF_Test)){
   sum = 0
   for(col in 1:3){
     if(Percent_Means_List[col] < 0){
-      if (Changes_Percent_Between_CIP_DF[row,col] < Percent_Means_List[col]){
+      if (Changes_Percent_Between_CIP_DF_Test[row,col] < Percent_Means_List[col]){
         sum = sum + 1
       }
     }else{
-      if (Changes_Percent_Between_CIP_DF[row,col] > Percent_Means_List[col]){
+      if (Changes_Percent_Between_CIP_DF_Test[row,col] > Percent_Means_List[col]){
         sum = sum + 1
       }
     }
   }
   if (sum >= 3){
-    Changes_Percent_Between_CIP_DF$CIP[row] <- 1
+    Changes_Percent_Between_CIP_DF_Test$CIP[row] <- 1
   }
 }
 
 
-sum(Changes_Percent_Between_CIP_DF$CIP)
+sum(Changes_Percent_Between_CIP_DF_Test$CIP)
 
 # -------------------------------------------------------------------------------
 
 # Set Data Here
 Train_3_Jan_thru_Apr <- Train_3[Train_3$Date_Time >= "2021-01-21 00:00:00" & 
-                                  Train_3$Date_Time <= "2021-03-29 02:00:00",]
+                                  Train_3$Date_Time <= "2021-04-29 02:00:00",]
 
 
 Percent_Means_List_CIP <- as.numeric(colMeans(Changes_Percent_Between_CIP_DF[Changes_Percent_Between_CIP_DF$CIP == 1,]))
@@ -145,10 +149,117 @@ x_2 <- List_of_Percent_Changes[2]
 x_3 <- List_of_Percent_Changes[3]
 
 
+
+Percent_Means_List
 # Calculate the total threshold variable
 CIP_Variable <- ( 1/Percent_Means_List_CIP[1] * (x_1) 
                   + 1/Percent_Means_List_CIP[2]*(x_2) 
                   + 1/Percent_Means_List_CIP[3]*(x_3))
+
+#-----------------------------------------------------------------------
+
+#linear model/logistic model
+
+
+# model <- lm(Changes_Percent_Between_CIP_DF$CIP ~
+#      Changes_Percent_Between_CIP_DF$Sp_Fl +
+#      Changes_Percent_Between_CIP_DF$Nt_DP + 
+#      Changes_Percent_Between_CIP_DF$P_f)
+# 
+# 
+# model$coefficients[2]
+# model$coefficients[3]
+# model$coefficients[4]
+
+
+
+
+# for(i in 1:nrow(Changes_Percent_Between_CIP_DF_Test)){
+#   output <- model$coefficients[2] * (Changes_Percent_Between_CIP_DF_Test$Sp_Fl[i]) + 
+#     model$coefficients[3] * (Changes_Percent_Between_CIP_DF_Test$Nt_DP[i]) + 
+#     model$coefficients[4] * (Changes_Percent_Between_CIP_DF_Test$P_f[i])
+#   output
+#   Changes_Percent_Between_CIP_DF_Test$CIP_Predict[i] <- round(output,2)
+# }
+
+
+
+Log_model <- glm(Changes_Percent_Between_CIP_DF$CIP ~ 
+                   Changes_Percent_Between_CIP_DF$Sp_Fl  +
+                   Changes_Percent_Between_CIP_DF$Nt_DP +
+                   Changes_Percent_Between_CIP_DF$P_f , 
+                 family=binomial)
+
+summary(Log_model)
+
+
+Changes_Percent_Between_CIP_DF_Test$CIP_Predict <- 0
+
+
+myvars <- c("Sp_Fl", "Nt_DP", "P_f")
+Changes_Percent_Between_CIP_DF_Test_Vars <- Changes_Percent_Between_CIP_DF_Test[myvars]
+
+?subset()
+
+for (i in 1:nrow(Changes_Percent_Between_CIP_DF_Test_Vars))
+{
+   Changes_Percent_Between_CIP_DF_Test$CIP_Predict[i] <- predict(Log_model, 
+                                      new_data = Changes_Percent_Between_CIP_DF_Test_Vars, type = "response")
+}
+
+
+predict_reg <- predict(Log_model, 
+                       Changes_Percent_Between_CIP_DF_Test_Vars[1,], type = "response")
+
+predict_reg <- predict(model, 
+                       Changes_Percent_Between_CIP_DF_Test_Vars[1,], type = "response")
+
+summary(Log_model)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#--------------------------------------------------------------------------------
+# Specific Flux drops 10%
+# Net Driving Pressure increases 4%
+# Feedwater Pressure increases 3.5%
+# 
+# ^^ = CIP
+
+summary(model)
+# 1/-10.24168
+# 
+# (-0.09764023 * 100)% -->   
+# 
+# 
+# -10.24*x1 + 3.86*x2 + 3.52*x3 = Response
+# 
+# x2 = 0, x3 = 0
+# 
+# -10.24*x1 = Response
+# 
+# 1/-10.24168
+# 1/3.86
+# 1/3
+
+
+
+
+
 
 
 # ------------------------------------------------------------------------------
