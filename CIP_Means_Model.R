@@ -129,7 +129,7 @@ data <- Train_3_Jan_thru_Apr
 List_of_Percent_Changes <- c()
 for (num in 2:4){
   model <- lm(data[,num] ~ data$Index)
-  abline(model, col = 'red')
+  #abline(model, col = 'red')
   slope <- as.numeric(model$coefficients[2])
   intercept <- as.numeric(model$coefficients[1])
   change <- slope * nrow(data)
@@ -150,4 +150,33 @@ CIP_Variable <- ( 1/Percent_Means_List_CIP[1] * (x_1)
                   + 1/Percent_Means_List_CIP[2]*(x_2) 
                   + 1/Percent_Means_List_CIP[3]*(x_3))
 
+
+# ------------------------------------------------------------------------------
+
+
+Log_model <- glm(Changes_Percent_Between_CIP_DF$CIP ~ 
+                   Changes_Percent_Between_CIP_DF$Sp_Fl  +
+                   Changes_Percent_Between_CIP_DF$Nt_DP +
+                   Changes_Percent_Between_CIP_DF$P_f , 
+                  family=binomial)
+
+summary(Log_model)
+
+
+
+?predict()
+
+
+for (i in 1:nrow(test_data)){
+  test_data$CIP_Predict[i] <- predict()
+}
+
+CIP <- Changes_Percent_Between_CIP_DF$CIP
+flux <- seq(Changes_Percent_Between_CIP_DF$Sp_Fl)
+
+
+plot(CIP ~ flux)
+new_model <- glm(CIP ~ flux, binomial)
+prediction <- predict(new_model,list(flux),type="response")
+lines(flux,prediction, col = "red")
 
