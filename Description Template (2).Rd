@@ -38,15 +38,14 @@ For each data object in the list, fill in the following:
 \item{\code{Index}}{Assigns a number to each row that helps with separating CIPs based on index number.}
 }
 
-\strong{(1)} \code{project_name$data_object2} is a... (describe the structure and dimensions).  
-ex: data frame with 3,285 rows and 6 columns, the variables of which are as follows:
+\strong{(1)} \code{Train1_ON_Change} is a data frame with 18 rows and 5 columns, the variables of which are as follows:
 
 \describe{
-\item{\code{variable_1}}{description (with units)}
-\item{\code{variable_2}}{description (with units)}
-\item{\code{variable_3}}{description (with units)}
-\item{\code{variable_4}}{description (with units)}
-\item{\code{variable_5}}{description (with units)}
+\item{\code{ON_Count}}{description (with units)}
+\item{\code{Start_Index}}{description (with units)}
+\item{\code{End_Index}}{description (with units)}
+\item{\code{Time_ON}}{description (with units)}
+\item{\code{Time_of_CIP}}{description (with units)}
 }
 
 }
