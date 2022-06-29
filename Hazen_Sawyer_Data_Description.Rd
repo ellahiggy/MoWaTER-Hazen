@@ -40,11 +40,11 @@ Data per Train (1-5) of the periods of time the train is on, consisting of a var
 
 
 \describe{
-\item{\code{ON_COUNT}}{Running count of the times which the train is on}
-\item{\code{Start_Index}}{The index immediately when the train turns on after a period of inactivity}
-\item{\code{End_Index}}{The index immediately when the train turns off after a period of activity}
-\item{\code{Time_ON}}{The durations the train was consecutively on for}
-\item{\code{Time_of_CIP}}{The durations the train was conescutively off for}
+\item{\code{ON_COUNT}}{Running count of the times which the train is on. (in hours)}
+\item{\code{Start_Index}}{The index immediately when the train turns on after a period of inactivity or presumed CIP. (in hours)}
+\item{\code{End_Index}}{The index immediately when the train turns off after a period of activity. (in hours)}
+\item{\code{Time_ON}}{The durations the train was consecutively on for. (in hours).}
+\item{\code{Time_of_CIP}}{The duration of a presumed CIP. (in hours)}
 }
 
 }
