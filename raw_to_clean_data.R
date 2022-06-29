@@ -126,9 +126,16 @@ Train3_ON_Change <- train_ONOFF(3)
 Train4_ON_Change <- train_ONOFF(4)
 Train5_ON_Change <- train_ONOFF(5)
 
+#list with all dataframes
+HS_Dataset <- list(Train_1 = Train_1, Train_2 = Train_2, Train_3 = Train_3, 
+                   Train_4 = Train_4, Train_5 = Train_5, 
+                   Train1_ON_Change = Train1_ON_Change, 
+                   Train2_ON_Change = Train2_ON_Change, 
+                   Train3_ON_Change = Train3_ON_Change,
+                   Train4_ON_Change = Train4_ON_Change, 
+                   Train5_ON_Change = Train5_ON_Change)
 
-save(Train_1, Train_2, Train_3, Train_4, Train_5, 
-     Train1_ON_Change, Train2_ON_Change, Train3_ON_Change,
-     Train4_ON_Change, Train5_ON_Change,
+
+#save the list as an rda file
+save(HS_Dataset,
      file = "Hazen_Sawyer_Data_Clean.rda")
-
