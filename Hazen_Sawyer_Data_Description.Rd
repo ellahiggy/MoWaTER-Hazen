@@ -1,9 +1,9 @@
-\name{MoWaTER_Hazen} % replace with your project name
-\alias{MoWaTER_Hazen} % replace with your project name
+\name{MoWaTER_Hazen}
+\alias{MoWaTER_Hazen}
 
-\docType{data} % don't change
+\docType{data}
 
-\title{MoWaTER_Hazen_and_Sawyer} % replace with your project full name
+\title{MoWaTER_Hazen_and_Sawyer}
 
 \description{
 This data came from Hazen and Sawyer, an environmental engineering firm who focuses on providing their clients with clean drinking water. This specific data came from one of Hazen and Sawyer's confidential clients and contained over 200 variables with more than 8000 observations with information on measurements that the client used to determine when a clean in place (CIP) process should occur for the filtration system. However, the 200 variables are separated between the five trains contained in filtration system; therefore, there are approximately 30 repeated variables for each train. We used a linear regression model with our response variable being the change in percent between CIPs for each predictor variable. The predictor variables were specific flux, normalized permeate conductivity, net driving pressure, feedwater pressure, and normalized differential pressure. Additionally, we used multiple cleaned data frames that contained data specific for each of the five trains.
@@ -17,7 +17,7 @@ This data came from Hazen and Sawyer, an environmental engineering firm who focu
 \format{
 The data is a list of 10 dataframes:
 
-\strong{(1) Dataframes 1-5 --> (8376 rows and 9 columns)}
+\strong{(1) Dataframes named "HS_Dataset$Train_#" --> (8376 rows and 9 columns)}
 
 Data per Train (1-5) of the following 9 variables for the 8376 records in the study. 
 
@@ -34,7 +34,8 @@ Data per Train (1-5) of the following 9 variables for the 8376 records in the st
 
 
 
-\strong{(2) Dataframes 6-10 --> (12-22 rows, 5 columns)}
+\strong{(2) Dataframes named "HS_Dataset$Train#_ON_Change" --> (12-22 rows, 5 columns)}
+
 
 Data per Train (1-5) of the periods of time the train is on, consisting of a varying number of observations of the following 5 variables. 
 
@@ -49,10 +50,8 @@ Data per Train (1-5) of the periods of time the train is on, consisting of a var
 
 }
 
-
+}
 \source{
-\cr
-\strong{Source}
 
 Data is provided by Hazen and Sawyer
 Contacts: 
@@ -64,24 +63,23 @@ Ben Stanford - BStanford@hazenandsawyer.com
 }
 
 \examples{
-\cr 
-\strong{Examples}
-\cr
 
 \code{load("Hazen_Sawyer_Data_Clean.rda")}
 
+Train_3 <- HS_Dataset$Train_3
+Train3_ON_Change <- HS_Dataset$Train3_ON_Change
 
 # ------------------------------------------------------------------------------
 # Create a plot with the Specific Flux of Train 3 in black and mark 
 # the areas where the train is off with vertical magenta lines. 
 
 Train_3_Off_Dates <- subset(Train_3$Date_Time, Train_3$ON_OFF == 0 | is.na(Train_3$ON_OFF))
-plot(Train_3$Date_Time, Train_3$Sp_Fl, col = "black", main  = "Train 3 Specific Flux over Time")
+plot(Train_3$Date_Time, Train_3$Sp_Fl, col = "black", 
+main  = "Train 3 Specific Flux over Time", xlab = "Time", ylab = "Specific Flux")
 abline(v = Train_3_Off_Dates, col = "magenta") 
 
 
 #-------------------------------------------------------------------------------
-\cr
 
 }
 
