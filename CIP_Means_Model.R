@@ -1,49 +1,49 @@
 
-General <- HSMaster[, c("Date_Time", "T_f_CO", "TCF_a")]
-
-vars <- c("Date_Time","Sp_Fl","Nt_DP","P_f","DP_n","NCp","Index")
-
-
-#Data for each variable by Train, as detailed above
-Train_1 <- HSMaster[,c("Date_Time", "Sp_Fl_TR1", "Nt_DP_TR1","DP_n_TR1","NCp_TR1", 
-                       "P_f_TR1")]
-Train_1$index <- 1:nrow(Train_1)
-colnames(Train_1) <- vars
-
-Train_2 <- HSMaster[,c("Date_Time", "Sp_Fl_TR2", "Nt_DP_TR2", "DP_n_TR2","NCp_TR2",
-                       "P_f_TR2")]
-Train_2$index <- 1:nrow(Train_2)
-colnames(Train_2) <- vars
-
-Train_3 <- HSMaster[,c("Date_Time", "Sp_Fl_TR3", "Nt_DP_TR3", "DP_n_TR3","NCp_TR3",
-                       "P_f_TR3")]
-Train_3$index <- 1:nrow(Train_3)
-colnames(Train_3) <- vars
-
-Train_4 <- HSMaster[,c("Date_Time", "Sp_Fl_TR4", "Nt_DP_TR4", "DP_n_TR4","NCp_TR4",
-                       "P_f_TR4")]
-Train_4$index <- 1:nrow(Train_4)
-colnames(Train_4) <- vars
-
-Train_5 <- HSMaster[,c("Date_Time", "Sp_Fl_TR5", "Nt_DP_TR5", "DP_n_TR5","NCp_TR5",
-                       "P_f_TR5")]
-Train_5$index <- 1:nrow(Train_5)
-colnames(Train_5) <- vars
+# General <- HSMaster[, c("Date_Time", "T_f_CO", "TCF_a")]
+# 
+# vars <- c("Date_Time","Sp_Fl","Nt_DP","P_f","DP_n","NCp","Index")
+# 
+# 
+# #Data for each variable by Train, as detailed above
+# Train_1 <- HSMaster[,c("Date_Time", "Sp_Fl_TR1", "Nt_DP_TR1","DP_n_TR1","NCp_TR1", 
+#                        "P_f_TR1")]
+# Train_1$index <- 1:nrow(Train_1)
+# colnames(Train_1) <- vars
+# 
+# Train_2 <- HSMaster[,c("Date_Time", "Sp_Fl_TR2", "Nt_DP_TR2", "DP_n_TR2","NCp_TR2",
+#                        "P_f_TR2")]
+# Train_2$index <- 1:nrow(Train_2)
+# colnames(Train_2) <- vars
+# 
+# Train_3 <- HSMaster[,c("Date_Time", "Sp_Fl_TR3", "Nt_DP_TR3", "DP_n_TR3","NCp_TR3",
+#                        "P_f_TR3")]
+# Train_3$index <- 1:nrow(Train_3)
+# colnames(Train_3) <- vars
+# 
+# Train_4 <- HSMaster[,c("Date_Time", "Sp_Fl_TR4", "Nt_DP_TR4", "DP_n_TR4","NCp_TR4",
+#                        "P_f_TR4")]
+# Train_4$index <- 1:nrow(Train_4)
+# colnames(Train_4) <- vars
+# 
+# Train_5 <- HSMaster[,c("Date_Time", "Sp_Fl_TR5", "Nt_DP_TR5", "DP_n_TR5","NCp_TR5",
+#                        "P_f_TR5")]
+# Train_5$index <- 1:nrow(Train_5)
+# colnames(Train_5) <- vars
 
 # ------------------------------------------------------------------------------
 
-Train_3_Oct_thru_Nov <- Train_3[Train_3$Date_Time >= "2020-10-15 00:00:00" & 
-                                  Train_3$Date_Time <= "2020-11-08 00:00:00",]
-
-Train_3_Nov_thru_Jan <- Train_3[Train_3$Date_Time >= "2020-11-17 00:00:00" & 
-                                  Train_3$Date_Time <= "2021-01-19 00:00:00",]
-
-Train_3_Jan_thru_Apr <- Train_3[Train_3$Date_Time >= "2021-01-21 00:00:00" & 
-                                  Train_3$Date_Time <= "2021-04-29 02:00:00",]
-
-
-Train_5_Apr <- Train_5[Train_5$Date_Time >= "2021-04-05 00:00:00" & 
-                         Train_5$Date_Time <= "2021-04-27 02:00:00",]
+# Train_3_Oct_thru_Nov <- Train_3[Train_3$Date_Time >= "2020-10-15 00:00:00" & 
+#                                   Train_3$Date_Time <= "2020-11-08 00:00:00",]
+# 
+# Train_3_Nov_thru_Jan <- Train_3[Train_3$Date_Time >= "2020-11-17 00:00:00" & 
+#                                   Train_3$Date_Time <= "2021-01-19 00:00:00",]
+# 
+# Train_3_Jan_thru_Apr <- Train_3[Train_3$Date_Time >= "2021-01-21 00:00:00" & 
+#                                   Train_3$Date_Time <= "2021-04-29 02:00:00",]
+# 
+# 
+# Train_5_Apr <- Train_5[Train_5$Date_Time >= "2021-04-05 00:00:00" & 
+#                          Train_5$Date_Time <= "2021-04-27 02:00:00",]
 
 #-------------------------------------------------------------------------------
 # Create new data frame to append to with the Change of 4 selected variables 
@@ -220,81 +220,101 @@ CIP_Variable <- ( 1/Percent_Means_List_CIP[1] * (x_1)
 
 ### linear model --------------
 
-model <- lm(Changes_Percent_Between_CIP_DF$CIP ~
-     Changes_Percent_Between_CIP_DF$Sp_Fl +
-     Changes_Percent_Between_CIP_DF$Nt_DP + 
-     Changes_Percent_Between_CIP_DF$P_f   +
-     Changes_Percent_Between_CIP_DF$DP_n  +
-     Changes_Percent_Between_CIP_DF$NCp)
+# 
+# 
+# 
+# 
 
 
-model$coefficients[2]
-model$coefficients[3]
-model$coefficients[4]
-model$coefficients[5]
-model$coefficients[6]
-
-for(i in 1:nrow(Changes_Percent_Between_CIP_DF)){
-  output <- model$coefficients[2] * (Changes_Percent_Between_CIP_DF$Sp_Fl[i]) + 
-    model$coefficients[3] * (Changes_Percent_Between_CIP_DF$Nt_DP[i]) + 
-    model$coefficients[4] * (Changes_Percent_Between_CIP_DF$P_f[i])  +
-    model$coefficients[5] * (Changes_Percent_Between_CIP_DF$DP_n[i])  +
-    model$coefficients[6] * (Changes_Percent_Between_CIP_DF$NCp[i])
-  
-    output
-    Changes_Percent_Between_CIP_DF$CIP_Predict[i] <- round(output,1)
-}
+# 
+# 
+# model <- lm(training_data$CIP ~
+#               training_data$Sp_Fl +
+#               training_data$Nt_DP + 
+#               training_data$P_f   +
+#               training_data$DP_n  +
+#               training_data$NCp)
+# 
+# 
+# model$coefficients[2]
+# model$coefficients[3]
+# model$coefficients[4]
+# model$coefficients[5]
+# model$coefficients[6]
+# 
+# for(i in 1:nrow(testing_data)){
+#   output <- model$coefficients[2] * (testing_data$Sp_Fl[i]) +
+#     model$coefficients[3] * (testing_data$Nt_DP[i]) +
+#     model$coefficients[4] * (testing_data$P_f[i])  +
+#     model$coefficients[5] * (testing_data$DP_n[i])  +
+#     model$coefficients[6] * (testing_data$NCp[i])
+#     testing_data$CIP_Predict[i] <- round(output,2)
+# }
+# 
+# lm_test_output <- predict(model, 
+#                            testing_data[,1:5], type = "response")
 
 
 # ------------------------------------------------------------------------------
 
 ### Log Model
 
-Log_model <- glm(Changes_Percent_Between_CIP_DF$CIP ~ 
-                   Changes_Percent_Between_CIP_DF$Sp_Fl  +
-                   Changes_Percent_Between_CIP_DF$Nt_DP +
-                   Changes_Percent_Between_CIP_DF$P_f , 
+
+
+summary(Log_model)
+
+
+
+# for(i in 1:nrow(testing_data))
+# {
+#   num <- exp(Log_model$coefficients[0] + 
+#       Log_model$coefficients[1] * testing_data$Sp_Fl[i] + 
+#       Log_model$coefficients[2] * testing_data$Nt_DP[i] +
+#       Log_model$coefficients[3] * testing_data$P_f[i] +
+#       Log_model$coefficients[4] * testing_data$DP_n[i] +
+#       Log_model$coefficients[5] * testing_data$NCp[i])
+#   
+#   testing_data$CIP_Predict[i] <- round(num/(1+num), 2)
+# }
+
+
+library(caTools)
+set.seed(0)
+sample <- sample.split(Changes_Percent_Between_CIP_DF$CIP, SplitRatio = 0.7)
+training_data <- subset(Changes_Percent_Between_CIP_DF, sample == TRUE)
+testing_data <- subset(Changes_Percent_Between_CIP_DF, sample == FALSE)
+
+Log_model <- glm(CIP ~ 
+                   Sp_Fl +
+                   Nt_DP +
+                   P_f   +
+                   DP_n  +
+                   NCp, 
+                 data = training_data,
                  family=binomial)
 
-summary(Log_model)
+predict_reg <- predict.glm(Log_model,
+                           newdata = testing_data[,1:5], type = "response")
+print(predict_reg)
+
+testing_data$CIP_Predict <- round(predict_reg, 2)
 
 
-Changes_Percent_Between_CIP_DF_Test$CIP_Predict <- 0
 
 
-myvars <- c("Sp_Fl", "Nt_DP", "P_f")
-Changes_Percent_Between_CIP_DF_Test_Vars <- Changes_Percent_Between_CIP_DF_Test[myvars]
 
-?subset()
-
-for (i in 1:nrow(Changes_Percent_Between_CIP_DF_Test_Vars))
+for(i in 1:nrow(testing_data))
 {
-  Changes_Percent_Between_CIP_DF_Test$CIP_Predict[i] <- predict(Log_model, 
-                                                                new_data = Changes_Percent_Between_CIP_DF_Test_Vars, type = "response")
+  
+  
+  
+  
 }
 
+    
+sum(Changes_Percent_Between_CIP_DF$CIP)
 
-predict_reg <- predict(Log_model, 
-                       Changes_Percent_Between_CIP_DF_Test_Vars[1,], type = "response")
-
-predict_reg <- predict(model, 
-                       Changes_Percent_Between_CIP_DF_Test_Vars[1,], type = "response")
-
-summary(Log_model)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+(0.74 + 0.55 + 1 + 0.91)/4
 
 
 
@@ -321,3 +341,22 @@ summary(model)
 # 1/-10.24168
 # 1/3.86
 # 1/3
+
+
+
+#--------------------------------------------------------------------------------
+# Changes_Percent_Between_CIP_DF_Test <- Changes_Percent_Between_CIP_DF
+# Changes_Percent_Between_CIP_DF_Test$CIP_Predict <- 0
+# myvars <- c("Sp_Fl", "Nt_DP", "P_f")
+# Changes_Percent_Between_CIP_DF_Test_Vars <- Changes_Percent_Between_CIP_DF_Test[myvars]
+# 
+# ?subset()
+
+# for (i in 1:nrow(Changes_Percent_Between_CIP_DF_Test_Vars))
+# {
+#   Changes_Percent_Between_CIP_DF_Test$CIP_Predict[i] <- predict(Log_model, 
+#                                                                 new_data = Changes_Percent_Between_CIP_DF_Test_Vars, type = "response")
+# }
+
+
+
