@@ -23,7 +23,7 @@ Data per Train (1-5) of the following 9 variables for the 8376 records in the st
 
 \describe{
 \item{\code{Date_Time}}{A measure of the date and its corresponding time. (Year-Month-Day; Hour-Min-Sec)}
-\item{\code{Sp_Fl}}{Specific Flux}
+\item{\code{Sp_Fl}}{Specific Flux - A measurement used of the rate at which water flows through a reverse osmosis membrane and is directly proportional to temperature and pressure.}
 \item{\code{Nt_DP}}{Net Driving Pressure - A measurement of the pressure difference between influent and effluent water.}
 \item{\code{NCp}}{Normalized Permeate Conductivity - A measurement of the conductivity of the water that leaves the filtration system. The measurement is normalized based on a calculation done by Hazen and Sawyer's client.}
 \item{\code{Per_R_a}}{Percent Recovery - A measurement of the percent of water recovered after being filtered through the train systems}
