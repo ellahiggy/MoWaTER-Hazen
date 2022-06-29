@@ -22,14 +22,15 @@ The data is a list of 10 dataframes:
 Data per Train (1-5) of the following 9 variables for the 8376 records in the study. 
 
 \describe{
+\item{\code{Date_Time}}{A measure of the date and its corresponding time. (Year-Month-Day; Hour-Min-Sec)}
 \item{\code{Sp_Fl}}{Specific Flux}
-\item{\code{Nt_DP}}{Net Driving Pressure}
-\item{\code{NCp}}{Normalized Permeate Conductivity}
-\item{\code{Per_R_a}}{Percent Recovery}
-\item{\code{P_f}}{Feedwater Pressure}
-\item{\code{SP_n}}{Normalized Salt Passage}
-\item{\code{ON_OFF}}{Train On/Off status}
-\item{\code{Index}}{Observations indexed by hour}
+\item{\code{Nt_DP}}{Net Driving Pressure - A measurement of the pressure difference between influent and effluent water.}
+\item{\code{NCp}}{Normalized Permeate Conductivity - A measurement of the conductivity of the water that leaves the filtration system. The measurement is normalized based on a calculation done by Hazen and Sawyer's client.}
+\item{\code{Per_R_a}}{Percent Recovery - A measurement of the percent of water recovered after being filtered through the train systems}
+\item{\code{P_f}}{Feedwater Pressure - A measurement of the amount of water that initially enters the system.}
+\item{\code{SP_n}}{Normalized Salt Passage - A measurement of the amount of salt that passes through the filtration system.}
+\item{\code{ON_OFF}}{Train On/Off status - A binary measurement to determine whether the trains are on (represented by 1) or off (represented by 0).}
+\item{\code{Index}}{Observations indexed by hour that assigns a number to each row. Helps with separating CIPs based on index number.} 
 
 
 
