@@ -72,79 +72,13 @@ Ben Stanford - BStanford@hazenandsawyer.com
 
 
 # ------------------------------------------------------------------------------
-# Create a plot with the Specific Flux values over each period Train 3 is on. 
+# Create a plot with the Specific Flux of Train 3 in black and mark 
+# the areas where the train is off with vertical magenta lines. 
 
-data_ONOFF <- Train_3
-data_ONOFF$ON_Count <- 0
-off <- 0
-on <- 0
-len <- nrow(data_ONOFF)
-for (num in 1:len) {
-  if (data_ONOFF$ON_OFF[num] == 0|is.na(data_ONOFF$ON_OFF[num])){
-    data_ONOFF$ON_Count[num] <- 0
-  }else {
-    if (num == 1){
-      on <<- on + 1
-    }else if (data_ONOFF$ON_OFF[num-1] == 0|is.na(data_ONOFF$ON_OFF[num-1])){
-      on <<- on + 1
-    }
-    data_ONOFF$ON_Count[num] <- on
-  }
-}
+Train_3_Off_Dates <- subset(Train_3$Date_Time, Train_3$ON_OFF == 0 | is.na(Train_3$ON_OFF))
+plot(Train_3$Date_Time, Train_3$Sp_Fl, col = "black", main  = "Train 3 Specific Flux over Time")
+abline(v = Train_3_Off_Dates, col = "magenta") 
 
-# If statements to add columns of dates for when the train is On & Off
-i <- 1
-# Replace "*_*" with Train number dataframe
-# Date when train was turned on
-if(i <- length(Train3_ON_Change$Start_Index)) {
-  Train_On_Date <- data_ONOFF$Date_Time[Train3_ON_Change$Start_Index]
-  Train3_ON_Change$Train_On_Date <- Train_On_Date
-}
-# Date when train was turned off
-if(i <= length(Train3_ON_Change$End_Index)) {
-  Train_Off_Date <- data_ONOFF$Date_Time[Train3_ON_Change$End_Index]
-  Train3_ON_Change$Train_Off_Date <- Train_Off_Date
-}
-
-### Train 3 Specific Flux
-# Create list of colors for our plot
-library(viridis)
-colors <- viridis(12)
-# Initialize data sets for the below loop, these can be changed to work with any
-# train 1-5
-Change_Data <- Train3_ON_Change
-Train_Data <- Train_3
-
-# For loop which plots Specific Flux for each time the the train was on over top
-# each other with the same starting point
-for (num in 1:nrow(Change_Data)){
-  data <- Train_Data[Train_Data$Index[Change_Data$Start_Index[num]:Change_Data$End_Index[num]],]
-  list <- data$Sp_Fl
-  data_indices <- c(Change_Data$Start_Index[num]:Change_Data$End_Index[num])
-  data_indices <- data_indices - data_indices[1] + 1
-  
-  # The below statement standardizes each function over 1 hour
-  #data_indices <- data_indices / Change_Data$Time_ON[num]
-  if (num == 1){
-    #if (Change_Data$Time_ON[num] > 100) {
-    plot(data_indices, list, main = "Train 3 Specific Flux Over Time",type = "l",
-    col = colors[num], ylim = c(.075,.09), xlab = "Time (hours)", ylab = "Specific Flux")
-    model <- lm(list ~ data_indices)
-    abline(model, col = colors[num])
-    # }
-  }
-  else{
-    # if (Change_Data$Time_ON[num] > 100) {
-    points(data_indices, list, type = "l", col = colors[num])
-    model <- lm(list ~ data_indices)
-    abline(model, col = colors[num])
-    # }
-  }
-}
-
-# Add legend displaying colors in order of oldest to newest
-legend("topright", inset = .01, title = "Cycle Number (12 = most recent)",legend= c(1:12)
-       ,fill = colors, horiz=TRUE,cex = 0.45)
 
 #-------------------------------------------------------------------------------
 \cr
