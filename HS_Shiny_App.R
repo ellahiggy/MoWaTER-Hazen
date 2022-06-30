@@ -12,10 +12,9 @@ library(dplyr)
 
 # Set Directory, Load Data Below & then run app #----------------------------------------------
 
-setwd("~/Desktop/Data")
+# setwd("~/Desktop/Data")
+# setwd("~/Desktop/Data/MoWaTER-Hazen")
 load("HSMaster - Hazen and Sawyer.rda")
-
-setwd("~/Desktop/Data/MoWaTER-Hazen")
 
 y_axis <- c("Date", "Feedwater_Pressure", "Percent_Recovery", 
             "Net_Driving_Pressure", "Specific_Flux", "Normalized_Differential_Pressure",
