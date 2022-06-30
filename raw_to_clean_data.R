@@ -15,11 +15,7 @@
 # Online Status - ON_TRx
 #  -------------------------------------------------------------------------
 
-
-# Please change the path to one that includes the following files:
-# "Sample_Membrane_Treatment_Plant_Data" spreadsheet
-# HSMaster - Hazen and Sawyer.rda"
-setwd("/Users/cyrilpillai/Desktop/Data_Processing")
+#Please ensure HSMaster is loaded intp the environment before proceeding
 load("HSMaster - Hazen and Sawyer.rda")
 
 vars <- c("Date_Time","Sp_Fl","Nt_DP","NCp","Per_R_a","P_f","SP_n","ON_OFF","Index")
