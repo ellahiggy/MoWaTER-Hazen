@@ -32,9 +32,9 @@ colnames(Changes_Percent_Between_CIP_DF) <- c("Sp_Fl","Nt_DP", "Per_R_a","NCp","
 
 df_index <- 1
 
-# ------------------------------------------------------------------------------
+#add each Train's percent changes for the above variables to the dataframe
 
-### Train 3  --------------
+### Train 3  -------------------------------------------------------------------
 
 for (value in 2:nrow(Train3_ON_Change)){ #Change Train Number
   First_Index <- Train3_ON_Change$Start_Index[value] #Change Train Number
@@ -61,7 +61,7 @@ for (value in 2:nrow(Train3_ON_Change)){ #Change Train Number
   df_index <<- df_index + 1
 }
 
-### Train 4 --------------
+### Train 4 ----------------------------------------------------------------------
 
 for (value in 2:nrow(Train4_ON_Change)){ #Change Train Number
   First_Index <- Train4_ON_Change$Start_Index[value] #Change Train Number
@@ -117,6 +117,12 @@ for (value in 2:nrow(Train5_ON_Change)){ #Change Train Number
 
 #---------------------------------------------------------------------------------
 
+#create the CIP column (0,1) based on how the % change value for the variables 
+#in each time period compares to the mean for all time periods in the train
+
+#If 4 or more % changes exceed the mean change, then 
+#a CIP happened immediately after that period (marked with a 1)
+
 Percent_Means_List <- as.numeric(colMeans(Changes_Percent_Between_CIP_DF))
 Changes_Percent_Between_CIP_DF$CIP <- 0
 
@@ -152,6 +158,8 @@ sample <- sample.split(Changes_Percent_Between_CIP_DF$CIP, SplitRatio = 0.7)
 training_data <- subset(Changes_Percent_Between_CIP_DF, sample == TRUE)
 testing_data <- subset(Changes_Percent_Between_CIP_DF, sample == FALSE)
 
+
+#create the logistic model
 Log_model <- glm(CIP ~ 
                    Sp_Fl    +
                    Nt_DP    +
@@ -165,8 +173,8 @@ predict_reg <- predict.glm(Log_model,
                            newdata = testing_data[,1:5], type = "response")
 testing_data$CIP_Predict <- round(predict_reg, 2)
 
+#model prediction values are the last column in testing_data, or can be seen
+#in predict_reg
 
 
 #-------------------------------------------------------------------------------
-
-
